@@ -64,4 +64,3 @@ jobs:
         AWS_S3_BUCKET: trivia-trials-psu-capstone-website
         AWS_REGION: us-east-1
         SOURCE_DIR: 'dist/trivia-trials-app/'
-view rawmain-deploy.yml hosted with ❤ by GitHub
