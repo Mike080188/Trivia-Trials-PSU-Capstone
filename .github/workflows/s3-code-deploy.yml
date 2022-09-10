@@ -48,7 +48,7 @@ jobs:
     - name: Run tests
       run: |
         cd TriviaTrialsApp/
-        npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+        npm test -- --no-watch --no-progress --code-coverage=true
 
     # Create dev build
     - name: NPM build Angular
