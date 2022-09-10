@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  SiteBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: Trivia-Trials-PSU-Capstone-Website
+      WebsiteConfiguration:
+        IndexDocument: index.html
+  SiteBucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref SiteBucket
+      PolicyDocument: 
+        Version: 2012-10-17
+        Statement: 
+          Effect: Allow 
+          Principal: "*"
+          Action: s3:GetObject
+          Resource: !Sub arn:aws:s3:::${SiteBucket}/*
+Outputs:
+  WebsiteURL:
+    Value: !GetAtt SiteBucket.WebsiteURL
+    Description: URL for static site hosted on s3
