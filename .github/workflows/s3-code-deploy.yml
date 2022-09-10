@@ -44,10 +44,12 @@ jobs:
         cd TriviaTrialsApp/
         npm install
 
-    # Run all tests
-    #- name: Run tests
-    #  run: |
-    #     npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+#     Run all tests
+    - name: Run tests
+      run: |
+        cd TriviaTrialsApp/
+        npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+
     # Create dev build
     - name: NPM build Angular
       run: |
@@ -58,13 +60,6 @@ jobs:
     #- name: Production Build
     # run: npm run build --prod 
     
-    # Configure AWS Credential
-#     - name: Configure AWS Credentials
-#       uses: aws-actions/configure-aws-credentials@v1
-#       with:
-#         aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-#         aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
-#         aws-region: us-east-1
 
     # Deploy to S3
     - name: Deploy to S3
