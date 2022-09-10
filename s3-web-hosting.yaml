@@ -3,7 +3,7 @@ Resources:
   SiteBucket:
     Type: "AWS::S3::Bucket"
     Properties:
-      BucketName: Trivia-Trials-PSU-Capstone-Website
+      BucketName: trivia-trials-psu-capstone-website
       WebsiteConfiguration:
         IndexDocument: index.html
   SiteBucketPolicy:
