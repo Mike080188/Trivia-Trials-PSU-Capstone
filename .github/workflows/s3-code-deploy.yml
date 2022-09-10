@@ -50,7 +50,9 @@ jobs:
     #     npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
     # Create dev build
     - name: NPM build Angular
-      run: npm run build
+      run: |
+        cd TriviaTrialsApp/
+        npm run build
 
     # Create production build
     #- name: Production Build
