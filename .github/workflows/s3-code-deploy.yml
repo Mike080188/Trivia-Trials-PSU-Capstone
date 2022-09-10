@@ -78,4 +78,4 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.ACCESS_KEY_SECRET }}
         AWS_S3_BUCKET: trivia-trials-psu-capstone-website
         AWS_REGION: us-east-1
-        SOURCE_DIR: 'dist/trivia-trials-app/'
+        SOURCE_DIR: 'TriviaTrialsApp/dist/trivia-trials-app/'
