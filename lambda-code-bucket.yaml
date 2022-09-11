@@ -9,3 +9,5 @@ Resources:
         BlockPublicPolicy: false
         RestrictPublicBuckets: false 
         IgnorePublicAcls: false
+
+
