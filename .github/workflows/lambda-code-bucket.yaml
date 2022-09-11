@@ -1,4 +1,4 @@
-name: 'Deploy S3 Web Hosting Bucket'
+name: 'Deploy Lambda Code Bucket'
 
 on: 
   push:
