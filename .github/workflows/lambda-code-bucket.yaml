@@ -34,7 +34,7 @@ jobs:
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: s3-website-deploy
+          name: lambda-bucket-deploy
           template: lambda-code-bucket.yaml
           no-fail-on-empty-changeset: "1"
           # parameter-overrides: "EC2InstanceType=t2.micro"
