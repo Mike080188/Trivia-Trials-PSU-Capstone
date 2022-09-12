@@ -1,5 +1,5 @@
 
-name: deploy aws S3
+name: Build and Deploy Angular to S3
 
 # Controls when the action will run. Triggers the workflow on push
 # events but only for the main branch
