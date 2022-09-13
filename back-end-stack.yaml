@@ -110,6 +110,15 @@ Resources:
       RestApiId: !Ref apiGateway
       StageName: TriviaTrialsApiGateway
 
+  ConfigLambdaPermission:
+    Type: "AWS::Lambda::Permission"
+    DependsOn:
+    - apiGateway
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: StartGame
+      Principal: apigateway.amazonaws.com
+
   # lambdaFunction:
   #   Type: AWS::Lambda::Function
   #   Properties:
