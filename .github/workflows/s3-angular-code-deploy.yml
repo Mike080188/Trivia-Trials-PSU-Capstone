@@ -1,12 +1,11 @@
-
-name: Build and Deploy Angular to S3
+name: Build and Deploy StartGame Python Lambda to S3
 
 # Controls when the action will run. Triggers the workflow on push
 # events but only for the main branch
 on:
   push:
     paths: 
-      - TriviaTrialsApp/**
+      - lambdas/start_game/**
     branches:
       - main
 
@@ -14,63 +13,83 @@ on:
   workflow_dispatch:
   
 jobs:
-  build-and-deploy-angular-to-s3:
+  build-and-deploy-start-game-lambda-to-s3:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    
-    - name: Check out Git repository
-      uses: actions/checkout@v2 
-    
-      #install node and npm
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        node-version: '16.x'
+        aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
+        aws-region: us-east-1
 
-    # Allows for re-using node_modules caching, making builds a bit faster.
-    - name: node_modules caching
-      uses: actions/cache@v1 
+    - name: Install dependencies with LambCI
+      uses: docker://lambci/lambda:build-python3.8
       with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-   
-    # Install the node modules
-    - name: NPM Install
-      run: |
-        cd TriviaTrialsApp/
-        npm install
+          entrypoint: pip
+          args: install -r lamdas/start_game/requirements.txt --target .
 
-#     Run all tests
-    - name: Run tests
+    - name: Bundle function with dependencies
       run: |
-        cd TriviaTrialsApp/
-        npm test -- --watch=false --browsers=ChromeHeadless --code-coverage=true
-
-    # Create dev build
-    - name: NPM build Angular
+        zip -r build.zip .
+    - name: Copy function zip file to S3
       run: |
-        cd TriviaTrialsApp/
-        npm run build
+          aws s3 cp build.zip s3://trivia-trials-config-bucket/function.zip
+    - name: Update function from S3
+      run: |
+          aws lambda update-function-code --function-name StartGame --s3-bucket trivia-trials-config-bucket --s3-key start_game.zip
+    
+#     - name: Check out Git repository
+#       uses: actions/checkout@v2 
+    
+#       #install node and npm
+#     - name: Setup Node.js
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: '16.x'
 
-    # Create production build
-    #- name: Production Build
-    # run: npm run build --prod 
+#     # Allows for re-using node_modules caching, making builds a bit faster.
+#     - name: node_modules caching
+#       uses: actions/cache@v1 
+#       with:
+#         path: ~/.npm
+#         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#         restore-keys: |
+#           ${{ runner.os }}-node-   
+#     # Install the node modules
+#     - name: NPM Install
+#       run: |
+#         cd TriviaTrialsApp/
+#         npm install
+# #     Run all tests
+#     - name: Run tests
+#       run: |
+#         cd TriviaTrialsApp/
+#         npm test -- --watch=false --browsers=ChromeHeadless --code-coverage=true
+#     # Create dev build
+#     - name: NPM build Angular
+#       run: |
+#         cd TriviaTrialsApp/
+#         npm run build
+#     # Create production build
+#     #- name: Production Build
+#     # run: npm run build --prod 
     
 
-    # Deploy to S3
-    - name: Deploy to S3
-      uses: jakejarvis/s3-sync-action@v0.5.1
-      with:
-          # --acl public read => makes files publicly readable(i.e. makes sure that your bucket settings are also set to public)
-          # --delete => permanently deletes files in S3 bucket that are not present in latest build
-        args: --acl public-read --follow-symlinks --delete  
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.ACCESS_KEY_SECRET }}
-        AWS_S3_BUCKET: trivia-trials-psu-capstone-website
-        AWS_REGION: us-east-1
-        SOURCE_DIR: 'TriviaTrialsApp/dist/trivia-trials-app/'
+#     # Deploy to S3
+#     - name: Deploy to S3
+#       uses: jakejarvis/s3-sync-action@v0.5.1
+#       with:
+#           # --acl public read => makes files publicly readable(i.e. makes sure that your bucket settings are also set to public)
+#           # --delete => permanently deletes files in S3 bucket that are not present in latest build
+#         args: --acl public-read --follow-symlinks --delete  
+#       env:
+#         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+#         AWS_SECRET_ACCESS_KEY: ${{ secrets.ACCESS_KEY_SECRET }}
+#         AWS_S3_BUCKET: trivia-trials-psu-capstone-website
+#         AWS_REGION: us-east-1
+#         SOURCE_DIR: 'TriviaTrialsApp/dist/trivia-trials-app/'
