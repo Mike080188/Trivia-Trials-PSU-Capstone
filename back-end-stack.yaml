@@ -97,7 +97,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: POST
         Type: AWS_PROXY
-        Uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${lambdaArn}/invocations
+        Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${StartGameFunction.Arn}/invocations
           # - lambdaArn: !GetAtt StartGameFunction.Arn
       ResourceId: !GetAtt apiGateway.RootResourceId
       RestApiId: !Ref apiGateway
