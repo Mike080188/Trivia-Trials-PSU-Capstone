@@ -28,23 +28,23 @@ jobs:
       aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
       aws-region: us-east-1
 
-- name: Install dependencies with LambCI
-  uses: docker://lambci/lambda:build-python3.8
-  with:
-      entrypoint: pip
-      args: install -r lamdas/start_game/requirements.txt --target .
+    - name: Install dependencies with LambCI
+      uses: docker://lambci/lambda:build-python3.8
+      with:
+          entrypoint: pip
+          args: install -r lamdas/start_game/requirements.txt --target .
 
-- name: Bundle function with dependencies
-  run: |
-      zip -r build.zip .
+    - name: Bundle function with dependencies
+      run: |
+          zip -r build.zip .
 
-- name: Copy function zip file to S3
-  run: |
-      aws s3 cp build.zip s3://trivia-trials-config-bucket/function.zip
+    - name: Copy function zip file to S3
+      run: |
+          aws s3 cp build.zip s3://trivia-trials-config-bucket/function.zip
 
-- name: Update function from S3
-  run: |
-       aws lambda update-function-code --function-name StartGame --s3-bucket trivia-trials-config-bucket --s3-key start_game.zip
+    - name: Update function from S3
+      run: |
+          aws lambda update-function-code --function-name StartGame --s3-bucket trivia-trials-config-bucket --s3-key start_game.zip
 
     
 #     - name: Check out Git repository
