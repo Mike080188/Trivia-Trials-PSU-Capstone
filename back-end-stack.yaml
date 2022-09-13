@@ -147,7 +147,9 @@ Resources:
       Principal: apigateway.amazonaws.com
       # note: if route *not* at API Gateway root, `SourceArn` would take the form of:
       #               arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/${apiGatewayStageName}/${apiGatewayHTTPMethod}/PATH_PART
-      SourceArn: !Sub arn:aws:execute-api:us-east-1:049850382269:${apiGateway}/TriviaTrialsApiGateway/POST/
+      # SourceArn: !Sub arn:aws:execute-api:us-east-1:049850382269:${apiGateway}/TriviaTrialsApiGateway/POST/
+      SourceArn: arn:aws:execute-api:us-east-1:049850382269:tnue03kxhg/*/POST/
+      
 
   # lambdaIAMRole:
   #   Type: AWS::IAM::Role
