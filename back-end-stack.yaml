@@ -94,7 +94,7 @@ Resources:
       AuthorizationType: NONE
       HttpMethod: GET
       Integration:
-        IntegrationHttpMethod: GET
+        IntegrationHttpMethod: POST
         Type: AWS_PROXY
         Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${StartGameFunction.Arn}/invocations
       ResourceId: !GetAtt apiGateway.RootResourceId
