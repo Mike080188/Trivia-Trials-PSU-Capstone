@@ -37,7 +37,7 @@ jobs:
       with:
           entrypoint: pip
 #           pip install --install-option="--prefix=$PREFIX_PATH" package_name
-          args: install --target=lambdas/start_game/" -r lambdas/start_game/requirements.txt --target .
+          args: install --target=lambdas/start_game/" -r lambdas/start_game/requirements.txt
 
     - name: Bundle function with dependencies
       run: |
