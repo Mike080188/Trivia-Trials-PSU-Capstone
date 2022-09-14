@@ -102,6 +102,19 @@ Resources:
       ResourceId: !GetAtt apiGateway.RootResourceId
       RestApiId: !Ref apiGateway
 
+
+  TestApiMethod:
+      Type: "AWS::ApiGateway::Method"
+      Properties:
+        AuthorizationType: NONE
+        HttpMethod: POST
+        Integration:
+          IntegrationHttpMethod: POST
+          Type: AWS_PROXY
+          Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${StartGameFunction.Arn}/invocations
+      ResourceId: !GetAtt apiGateway.RootResourceId
+      RestApiId: !Ref apiGateway
+
   apiGatewayDeployment:
     Type: AWS::ApiGateway::Deployment
     DependsOn:
