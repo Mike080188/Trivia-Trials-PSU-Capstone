@@ -1,0 +1,52 @@
+name: Build and Deploy StartGame Python Lambda to S3 2
+
+# Controls when the action will run. Triggers the workflow on push
+# events but only for the main branch
+on:
+  push:
+    paths: 
+      - lambdas/start_game/**
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  build-and-deploy-start-game-lambda-to-s3:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
+          aws-region: us-east-1
+
+    - name: Install dependencies with LambCI
+      run: |
+        cd lambdas/start_game/
+        pip install -r requirements.txt -t .
+
+    - name: Run Unit Tests
+      run: |
+        cd lambdas/start_game/
+        python -m pytest --cov-report term --cov=start_game  tests/
+
+    - name: Bundle function with dependencies
+      run: |
+        cd lambdas/start_game/
+        zip -r build.zip .
+
+    - name: Copy function zip file to S3
+      run: |
+          aws s3 cp lambdas/start_game/build.zip s3://trivia-trials-config-bucket/start_game.zip
+
+    - name: Update function from S3
+      run: |
+          aws lambda update-function-code --function-name StartGame --s3-bucket trivia-trials-config-bucket --s3-key start_game.zip
