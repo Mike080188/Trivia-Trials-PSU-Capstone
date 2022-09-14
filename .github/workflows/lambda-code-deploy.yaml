@@ -42,12 +42,13 @@ jobs:
 #       uses: docker://lambci/lambda:build-python3.8
       run: |
         cd lambdas/start_game/
-        pip install -r ./lambdas/start_game/requirements.txt
+        pip install -r requirements.txt
 
 
     - name: Bundle function with dependencies
       run: |
-          zip -r lambdas/start_game/build.zip .
+        cd lambdas/start_game/
+        zip -r build.zip .
 
     - name: Copy function zip file to S3
       run: |
