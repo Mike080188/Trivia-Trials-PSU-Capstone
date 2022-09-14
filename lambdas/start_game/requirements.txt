@@ -1,4 +1,6 @@
 requests
 pytest
 boto3
-coverage
+pytest
+pytest-cov
+pytest-github-actions-annotate-failures
