@@ -3,4 +3,4 @@ pytest
 boto3
 pytest
 pytest-cov
-pytest-github-actions-annotate-failures
+
