@@ -1,6 +1,6 @@
 import json
-# import pandas as pd
-# import requests
+import pandas as pd
+import requests
 
 def handler(event, context):
     # p_version = pd.__version__
