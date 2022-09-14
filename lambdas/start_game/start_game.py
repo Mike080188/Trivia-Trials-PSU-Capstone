@@ -1,5 +1,6 @@
 import json
 import requests
+import boto3
 
 def handler(event, context):
     # p_version = pd.__version__
