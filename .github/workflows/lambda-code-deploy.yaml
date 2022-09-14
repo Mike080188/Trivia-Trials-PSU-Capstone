@@ -42,7 +42,7 @@ jobs:
 #       uses: docker://lambci/lambda:build-python3.8
       run: |
         cd lambdas/start_game/
-        pip install -r requirements.txt
+        pip install -r requirements.txt -t .
 
 
     - name: Bundle function with dependencies
