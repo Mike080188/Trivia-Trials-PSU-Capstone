@@ -123,11 +123,15 @@ Resources:
 
   lambdaApiGatewayInvoke:
     Type: AWS::Lambda::Permission
+    DependsOn:
+      - StartGameFunction
+      - apiGateway
     Properties:
       Action: lambda:InvokeFunction
       FunctionName: StartGame
       Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:us-east-1:049850382269:tnue03kxhg/*
+      SourceArn: !Sub arn:aws:execute-api:us-east-1:049850382269:${apiGateway}/*
+      # SourceArn: arn:aws:execute-api:us-east-1:049850382269:tnue03kxhg/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
