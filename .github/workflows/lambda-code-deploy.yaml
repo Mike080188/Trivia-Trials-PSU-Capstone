@@ -52,7 +52,8 @@ jobs:
         # python -m coverage run -m pytest # works
         # python -m pytest --exitfirst --verbose --failed-first \
         # --cov=. --cov-report html
-        python -m coverage run --source=.. -m pytest
+        # python -m coverage run --source=.. -m pytest
+        python -m pytest --cov-report term --cov=start_game  tests/
 
     - name: Bundle function with dependencies
       run: |
