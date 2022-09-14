@@ -40,7 +40,7 @@ jobs:
           args: install --install-option="--prefix=lambdas/start_game/" -r lambdas/start_game/requirements.txt --target .
 
     - name: Bundle function with dependencies
-      run: |s
+      run: |
           zip -r build.zip .
 
     - name: Copy function zip file to S3
