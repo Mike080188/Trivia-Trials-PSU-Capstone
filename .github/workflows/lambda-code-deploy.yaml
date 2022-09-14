@@ -47,7 +47,7 @@ jobs:
     - name: Run Unit Tests
       run: |
         cd lambdas/start_game/
-        pytest
+        python -m pytest 
 
     - name: Bundle function with dependencies
       run: |
