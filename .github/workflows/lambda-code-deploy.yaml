@@ -30,16 +30,21 @@ jobs:
 
     - name: Install dependencies with LambCI
       uses: docker://lambci/lambda:build-python3.8
+      run: |
+          cd lambdas/start_game/
+          zip -r build.zip .
       with:
           entrypoint: pip
           args: install -r lambdas/start_game/requirements.txt --target .
 
     - name: Bundle function with dependencies
       run: |
+          cd lambdas/start_game/
           zip -r build.zip .
 
     - name: Copy function zip file to S3
       run: |
+          cd lambdas/start_game/
           aws s3 cp build.zip s3://trivia-trials-config-bucket/start_game.zip
 
     - name: Update function from S3
