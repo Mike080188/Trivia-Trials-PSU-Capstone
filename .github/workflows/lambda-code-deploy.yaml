@@ -14,7 +14,7 @@ on:
   
 defaults:
   run:
-    working-directory: lambdas/start_game/
+    working-directory: lambdas/start_game
   
 jobs:
   build-and-deploy-start-game-lambda-to-s3:
