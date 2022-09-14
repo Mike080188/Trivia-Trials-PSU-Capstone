@@ -48,7 +48,9 @@ jobs:
       run: |
         cd lambdas/start_game/
         # python -m pytest
-        python -m coverage run -m pytest
+        # python -m coverage run -m pytest # works
+        python -m pytest --exitfirst --verbose --failed-first \
+        --cov=. --cov-report html
 
     - name: Bundle function with dependencies
       run: |
