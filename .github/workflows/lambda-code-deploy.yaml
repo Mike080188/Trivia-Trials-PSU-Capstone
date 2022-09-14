@@ -44,6 +44,9 @@ jobs:
         cd lambdas/start_game/
         pip install -r requirements.txt -t .
 
+    - name: Run Unit Tests
+      run: |
+        pytest
 
     - name: Bundle function with dependencies
       run: |
