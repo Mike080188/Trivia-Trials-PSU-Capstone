@@ -1,0 +1,21 @@
+start-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(41, 109, 192, 0.7);
+  z-index: 10;
+}
+
+.side-nav {
+  position: fixed;
+  width: 25%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(240, 34, 34, 0.7);
+  z-index: 10;
+}
+
+
