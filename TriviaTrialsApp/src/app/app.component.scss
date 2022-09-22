@@ -4,8 +4,26 @@ start-screen {
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(41, 109, 192, 0.7);
-  z-index: 10;
+  // background: rgb(214, 163, 163);
+  // z-index: 1;
+  // // opacity: .5;
+
+  margin:0px;
+  height:100%;
+  width:100%;
+      /* Set the height to match that of the viewport. */
+      // height: 100vh;
+
+      // /* Set the width to match that of the viewport. */
+      // width: 100vw;
+  background:url('../assets/images/clock_background.png')no-repeat center center fixed;
+    // background:url('images/clock_background.png')no-repeat center center fixed;
+  -webkit-background-size:cover;
+  -o-background-size:cover;
+  -moz-background-size:cover;
+  background-size:cover;
+
+
 }
 
 .side-nav {
