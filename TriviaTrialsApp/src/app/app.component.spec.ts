@@ -33,10 +33,12 @@ describe('AppComponent', () => {
     var startScreenDebugElement = fixture.debugElement.query(By.css('start-screen'));
     expect(startScreenDebugElement).toBeTruthy();
 
+    // Click single player button
     const buttonElement = fixture.debugElement.query(By.css('.single-player-button'));
     buttonElement.triggerEventHandler('click', null);
     fixture.detectChanges();
 
+    // Start screen no longer present
     startScreenDebugElement = fixture.debugElement.query(By.css('start-screen'));
     expect(startScreenDebugElement).toBeFalsy();
   });
