@@ -1,11 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { StartScreenComponent } from './start-screen/start-screen.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        StartScreenComponent
       ],
     }).compileComponents();
   });
@@ -22,10 +25,21 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('TriviaTrialsApp');
   });
 
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain('TriviaTrialsApp app is running!');
-  // });
+  it('Should start game when "Single Player Game" button is clicked', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+
+    // Start screen is present in DOM
+    var startScreenDebugElement = fixture.debugElement.query(By.css('start-screen'));
+    expect(startScreenDebugElement).toBeTruthy();
+
+    // Click single player button
+    const buttonElement = fixture.debugElement.query(By.css('.single-player-button'));
+    buttonElement.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    // Start screen no longer present
+    startScreenDebugElement = fixture.debugElement.query(By.css('start-screen'));
+    expect(startScreenDebugElement).toBeFalsy();
+  });
 });
