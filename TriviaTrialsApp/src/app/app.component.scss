@@ -12,12 +12,13 @@ start-screen {
   margin:0px;
   height:100%;
   width:100%;
-  background:url('../assets/images/clock_background.png')no-repeat center center fixed;
+  background:url('../assets/images/clock_background.png')no-repeat center center rgb(0, 0, 0);
     // background:url('images/clock_background.png')no-repeat center center fixed;
-  -webkit-background-size:cover;
-  -o-background-size:cover;
-  -moz-background-size:cover;
-  background-size:cover;
+  -webkit-background-size:100% 100%;
+  -o-background-size:100% 100%;
+  -moz-background-size:100% 100%;
+  // background-size:;
+  background-size: 100% 100%;
 
 
 }
@@ -50,15 +51,15 @@ main-game-screen {
 
 }
 
-.side-nav {
-  position: fixed;
-  width: 25%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: rgba(240, 34, 34, 0.7);
-  z-index: 10;
-}
+// .side-nav {
+//   position: fixed;
+//   width: 25%;
+//   height: 100%;
+//   left: 0;
+//   top: 0;
+//   background: rgba(240, 34, 34, 0.7);
+//   z-index: 10;
+// }
 
 
 // .side-nav {

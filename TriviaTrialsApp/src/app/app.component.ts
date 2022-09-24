@@ -8,13 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'TriviaTrialsApp';
   gameStarted = false;
-  //Test Commit 2
+  playerName = "";
+  score = 0;
 
   ngOnInit() {
-    // this.title;
   }
 
-  startGame(newGame: string) {
+  startGame(name: string) {
     this.gameStarted = true;
+    this.playerName = name;
   }
 }
