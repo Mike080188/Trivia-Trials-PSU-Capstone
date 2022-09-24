@@ -33,7 +33,7 @@
 </div> -->
 
 <div class="content" role="main">
-  <start-screen *ngIf="!gameStarted" (newGameEvent)="startGame($event)"></start-screen>
+  <start-screen *ngIf="!gameStarted" (newSinglePlayerGameEvent)="startGame($event)"></start-screen>
   <main-game-screen *ngIf="gameStarted"></main-game-screen>
   <!-- <mat-sidenav-container class="side-nav">
     <mat-sidenav>Start</mat-sidenav>

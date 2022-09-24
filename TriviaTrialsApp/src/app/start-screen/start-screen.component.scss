@@ -1,3 +1,65 @@
+.single-player-button {
+  font-family : fantasy;
+  font-size: 2.5em;
+  // background-color: rgba(0, 0, 0, 0.623);
+  background-color: rgb(0, 0, 0);
+  color: #42d3ffd8;
+  border-color: #fcf810d8;
+  // background-color: transparent;
+  border-radius: 1em;
+  padding: 8px 22px;
+  margin-top: 40px;
+}
+.name-input::placeholder {
+  font-weight: bold;
+  opacity: .5;
+  color: black;
+  // background-color: rgb(0, 0, 0);
+  // color: #42d3ffd8;
+  // border-color: #fcf810d8;
+  font-family : fantasy;
+  font-size: 1.2em;
+  // padding: 8px 16px;
+  padding: 5px 10px;
+  padding-left: 25px;
+
+}
+.name-input {
+  // font-weight: bold;
+  // opacity: .5;
+  // color: black;
+  width: 318px;
+  padding: 5px 10px;
+  padding-left: 25px;
+  background-color: white(0, 0, 0);
+  // color: #42d3ffd8;
+  color: black;
+  opacity: .8;
+  border-color: #fcf810d8;
+  font-family : fantasy;
+  font-size: 2.2em;
+  border-radius: 1em;
+  border-width: 3px;
+  padding: 8px 22px;
+  // padding: 8px 16px;
+}
+
+.outer-container {
+  height: 500px;
+  width: 450px;
+  bottom: 0;
+  right: 130px;
+  position: absolute;
+}
+
+.red-border {
+  border-color: red;
+  border-width: thick;
+}
+
+
+
+
 // .side-nav-container {
 //   position: fixed;
 //   height: 100%;
@@ -39,18 +101,6 @@
 
 // }
 
-.single-player-button {
-  font-family : inherit;
-  font-size: 2.5em;
-  // background-color: rgba(0, 0, 0, 0.623);
-  background-color: gray;
-  color: #42d3ffd8;
-  border-color: #fcf810d8;
-  // background-color: transparent;
-  border-radius: 1em;
-  padding: 8px 16px;
-}
-
 // .cart-item, .shipping-item {
 //   width: 100%;
 //   min-width: 400px;
@@ -64,27 +114,118 @@
 //   background-color: #7298df;
 // }
 
-.outer-container {
-  width: 100%;
-  height: 100%;
-  // min-width: 180px;
-  // max-width: 350px;
-  // display: flex;
-  // flex-direction: right;
-  // justify-content: flex-end;
-  // padding: 16px 32px;
-  margin-top: 32%;
-  // margin-right: 13%;
-  margin-left: 69%;
+// .outer-container {
+//   width: 100%;
+//   height: 100%;
+//   // min-width: 180px;
+//   // max-width: 350px;
+//   // display: flex;
+//   // flex-direction: right;
+//   // justify-content: flex-end;
+//   // padding: 16px 32px;
+//   margin-top: 32%;
+//   // margin-right: 13%;
+//   margin-left: 69%;
 
-  // margin-top: 32%;
-  // margin-right: 13%;
-  // justify-content: right;
+//   // margin-top: 32%;
+//   // margin-right: 13%;
+//   // justify-content: right;
 
-  // background:url('../../assets/images/clock_background.png')no-repeat center center fixed;
-  // background:url('images/clock_background.png')no-repeat center center fixed;
-  // -webkit-background-size:cover;
-  // -o-background-size:cover;
-  // -moz-background-size:cover;
-  // background-size:cover;
-}
+//   // background:url('../../assets/images/clock_background.png')no-repeat center center fixed;
+//   // background:url('images/clock_background.png')no-repeat center center fixed;
+//   // -webkit-background-size:cover;
+//   // -o-background-size:cover;
+//   // -moz-background-size:cover;
+//   // background-size:cover;
+// }
+
+
+
+//   // width: 100%;
+//   // height: 100%;
+//   // min-width: 180px;
+//   // max-width: 350px;
+//   // display: flex;
+//   // flex-direction: right;
+//   // justify-content: flex-end;
+//   // padding: 16px 32px;
+//   // margin-top: 32%;
+//   // margin-left: 69%;
+//   // margin-right: 13%;
+
+//   // margin-top: 32%;
+//   // margin-right: 13%;
+//   // justify-content: right;
+
+// //   background: rgba(233, 47, 47, 0.7);
+// //   z-index: 10;
+// // }
+// // .outer-container {
+// //   margin:0px;
+// //   height:100%;
+// //   width:100%;
+// //   background:url('../../assets/images/clock_background.png')no-repeat center center fixed;
+// //     // background:url('images/clock_background.png')no-repeat center center fixed;
+// //   -webkit-background-size:cover;
+// //   -o-background-size:cover;
+// //   -moz-background-size:cover;
+// //   background-size:cover;
+// //   // display: block;
+// //   // position: static;
+// //   // background-blend-mode: luminosity;
+// //   // height: 100%;
+// //   // width: 100%;
+// //   // background-position: center;
+// //   // background-repeat: no-repeat;
+// //   // background-size: cover;
+// //   // pointer-events: none;
+// //   // cursor: default;
+// //   // opacity: .50
+// //   // object-fit: cover;
+// //   // overflow: hidden;
+// // }
+
+// // img {
+// //   height: 100%;
+// //   width: 100%;
+// //   opacity: 100%;
+
+// // }
+
+// .fancy-button {
+
+//   font-family : inherit;
+//   font-size: 2.5em;
+//   // background-color: rgba(0, 0, 0, 0.623);
+//   background-color: gray;
+//   color: #42d3ffd8;
+//   border-color: #fcf810d8;
+//   // background-color: transparent;
+//   border-radius: 1em;
+//   padding: 8px 16px;
+// }
+
+// .outer-container {
+//   width: 100%;
+//   height: 100%;
+//   // min-width: 180px;
+//   // max-width: 350px;
+//   // display: flex;
+//   // flex-direction: right;
+//   // justify-content: flex-end;
+//   // padding: 16px 32px;
+//   margin-top: 32%;
+//   // margin-right: 13%;
+//   margin-left: 69%;
+
+//   // margin-top: 32%;
+//   // margin-right: 13%;
+//   // justify-content: right;
+
+//   // background:url('../../assets/images/clock_background.png')no-repeat center center fixed;
+//   // background:url('images/clock_background.png')no-repeat center center fixed;
+//   // -webkit-background-size:cover;
+//   // -o-background-size:cover;
+//   // -moz-background-size:cover;
+//   // background-size:cover;
+// }

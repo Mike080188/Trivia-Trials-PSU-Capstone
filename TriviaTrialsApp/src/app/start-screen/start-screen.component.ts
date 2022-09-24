@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-// import { EventEmitter } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'start-screen',
@@ -9,19 +7,24 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class StartScreenComponent implements OnInit {
 
-  side_nav_open = false;
+  playerName: string = "";
+  gameInitiated: boolean = false;
 
-  @Output() newGameEvent = new EventEmitter<string>();
+  @Output() newSinglePlayerGameEvent = new EventEmitter<string>();
 
-  // constructor() { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.side_nav_open = false;
   }
 
   startSinglePlayer() {
+    this.gameInitiated = true;
+    if(!this.playerName) {
+      console.log("Need a name")
+      return;
+    }
     console.log("Game Started!")
-    this.newGameEvent.emit("event_data");
+    this.newSinglePlayerGameEvent.emit(this.playerName);
   }
 
 }

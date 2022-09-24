@@ -7,6 +7,21 @@
   </mat-sidenav-content>
 </mat-sidenav-container> -->
 <div class="outer-container">
-  <button class="button single-player-button" (click)="startSinglePlayer()">Single Player Game</button> -->
-</div>
+  <!-- <input class="name-input"><input> -->
+  <!-- [(ngModel)]="playerName" -->
+  <!-- (focusout)=" playerName=(<HTMLInputElement>$event.target).value" -->
+  <!-- [(change)]="playerName=$event.target.value" -->
+  <input
+      [(ngModel)]="playerName"
+       name="name-input"
+       class="name-input"
+       minLength="1" maxLength="16"
+       placeholder="Enter Your Name"
+       [ngClass]="{'red-border' : !playerName && gameInitiated}">
+  <button
+      class="button single-player-button"
+      (click)="startSinglePlayer()">
+      Single Player Game
+  </button>
 
+</div>
