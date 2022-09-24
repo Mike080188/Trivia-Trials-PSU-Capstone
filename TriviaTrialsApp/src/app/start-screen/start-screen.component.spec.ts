@@ -38,6 +38,8 @@ describe('StartScreenComponent', () => {
 
     // Event has been emitted with the player's name
     expect(component.newSinglePlayerGameEvent.emit).toHaveBeenCalledWith('Tester');
+    // Game has been initiated
+    expect(component.gameInitiated).toBeTrue()
  });
 
  it('should not emit event when "Single Player Game" is clicked and a name not provided', () => {
@@ -46,7 +48,7 @@ describe('StartScreenComponent', () => {
   const component = fixture.componentInstance;
   spyOn(component.newSinglePlayerGameEvent, 'emit');
 
-  // trigger the click
+  // Click single player button
   const nativeElement = fixture.nativeElement;
   const button = nativeElement.querySelector('.single-player-button');
   button.dispatchEvent(new Event('click'));
