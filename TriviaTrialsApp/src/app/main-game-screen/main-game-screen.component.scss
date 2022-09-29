@@ -1,10 +1,29 @@
-// main-game-screen {
-//   position: fixed;
-//   width: 100%;
-//   height: 100%;
-//   left: 0;
-//   top: 0;
-//   // background: rgb(139, 15, 170);
-//   background-image: url("TriviaTrialsApp/src/assets/images/clock_background.png");
-//   z-index: 10;
-// }
+score-display {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  background-color: #40008a;
+  height: 23%;
+  width: 21%;
+  color: rgb(27, 196, 12);
+  border: 6px double rgb(27, 196, 12);
+  border-top: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: fit-content;
+  width: fit-content;
+  padding: 25px 40px;
+}
+
+.bottom-display {
+  bottom: 0;
+  height: 23%;
+  width: 100%;
+  background-color: #40008a;
+  position: absolute;
+
+  border-top-color: black;
+  border-top-width: 0.2em;
+  border-top-style: dashed;
+  // border-top: groove;
+}

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { PlayerDetailsService } from './player-details.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [PlayerDetailsService]
 })
 export class AppComponent implements OnInit{
   title = 'TriviaTrialsApp';
@@ -14,8 +16,13 @@ export class AppComponent implements OnInit{
   ngOnInit() {
   }
 
+  constructor(private playerDetailsService: PlayerDetailsService) {
+  }
+
   startGame(name: string) {
     this.gameStarted = true;
     this.playerName = name;
+    this.playerDetailsService.nameSetSource.next(this.playerName); // Send name to scoreboard
   }
+
 }
