@@ -1,21 +1,9 @@
-<!-- <p>start-screen works!</p> -->
-<!-- <mat-sidenav-container class="side-nav-container">
-  <mat-sidenav mode="side" opened="{{side_nav_open}}"></mat-sidenav>
-  <mat-sidenav-content>
-    <p>Paragraph</p>
-    <button>Button</button>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
 <div class="outer-container">
-  <!-- <input class="name-input"><input> -->
-  <!-- [(ngModel)]="playerName" -->
-  <!-- (focusout)=" playerName=(<HTMLInputElement>$event.target).value" -->
-  <!-- [(change)]="playerName=$event.target.value" -->
   <input
       [(ngModel)]="playerName"
        name="name-input"
        class="name-input"
-       minLength="1" maxLength="16"
+       minLength="1" maxLength="14"
        placeholder="Enter Your Name"
        [ngClass]="{'red-border' : !playerName && gameInitiated}">
   <button
