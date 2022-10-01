@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { ScoreDisplayComponent } from './score-display.component';
 
@@ -19,6 +20,23 @@ describe('ScoreDisplayComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display playerScore and playerName', () => {
+    // Set player name and score in component
+    component.playerName = 'Tester';
+    component.playerScore = 44;
+    fixture.detectChanges();
+
+    // Score number should be displayed as 44'
+    var scoreNumberElement = fixture.debugElement.query(By.css('.score-number'));
+    var scoreNumber = scoreNumberElement.nativeElement.textContent
+    expect(scoreNumber).toEqual("44");
+
+    // Name should be displayed as 'Tester'
+    var scoreNameElement = fixture.debugElement.query(By.css('.score-name'));
+    var scoreName = scoreNameElement.nativeElement.textContent
+    expect(scoreName).toEqual("Tester");
   });
 
   it('should update playerScore and playerName when they are updated via shared service', () => {
