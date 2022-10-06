@@ -121,21 +121,13 @@ Resources:
       RestApiId: !Ref apiGateway
       StageName: TriviaTrialsApiGateway
 
-  lambdaApiGatewayPostInvoke:
+  lambdaApiGatewayInvoke:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
       FunctionName: StartGame
       Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:us-east-1:049850382269:tnue03kxhg/*/POST/
-
-  lambdaApiGatewayGetInvoke:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName: StartGame
-      Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:us-east-1:049850382269:47sdbk9dd7/*/GET/
+      SourceArn: arn:aws:execute-api:us-east-1:049850382269:47sdbk9dd7/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
