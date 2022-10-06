@@ -28,8 +28,8 @@ def handler(event, context):
     return {
         "statusCode": 200,
         "body": json.dumps(body),
-        # 'headers': {
-        #     'Content-Type': 'application/json',
-        # },
+        'headers': {
+            'Content-Type': 'application/json',
+        },
     }
     # return "Hello World!!"
