@@ -8,20 +8,66 @@ def handler(event, context):
     # status_code = r.status_code
 
     # return_statement = "Google status code: " + status_code + "\nPandas version: " + p_version
+    # body = [
+    #     {
+    #         'q': 'Who killed Alexander Hamilton?',
+    #         'correctAnswer': 'Vice President Aaaron Burr',
+    #         'wrongAnswer1': 'Patrick Henry',
+    #         'wrongAnswer2': 'Himself',
+    #         'wrongAnswer3': 'Benedict Arnold',
+    #     },
+    #     {
+    #         'q': 'What is 37 x 4 x 5?',
+    #         'correctAnswer': '740',
+    #         'wrongAnswer1': '620',
+    #         'wrongAnswer2': '988',
+    #         'wrongAnswer3': '580',
+    #     }
+    # ]
+
+
     body = [
         {
             'q': 'Who killed Alexander Hamilton?',
-            'correctAnswer': 'Vice President Aaaron Burr',
-            'wrongAnswer1': 'Patrick Henry',
-            'wrongAnswer2': 'Himself',
-            'wrongAnswer3': 'Benedict Arnold',
+            'answers': [
+                {
+                    'answer': 'Vice President Aaaron Burr',
+                    'isCorrect': True
+                },
+                {
+                    'answer': 'Patrick Henry',
+                    'isCorrect': False
+                },
+                {
+                    'answer': 'Himself',
+                    'isCorrect': False
+                },
+                {
+                    'answer': 'Benedict Arnold',
+                    'isCorrect': False
+                }
+            ]
         },
         {
             'q': 'What is 37 x 4 x 5?',
-            'correctAnswer': '740',
-            'wrongAnswer1': '620',
-            'wrongAnswer2': '988',
-            'wrongAnswer3': '580',
+            'answers': [
+                {
+                    'answer': '740',
+                    'isCorrect': True
+                },
+                {
+                    'answer': '620',
+                    'isCorrect': False
+                },
+                {
+                    'answer': '988',
+                    'isCorrect': False
+                },
+                {
+                    'answer': '580',
+                    'isCorrect': False
+                }
+            ]
         }
     ]
 
