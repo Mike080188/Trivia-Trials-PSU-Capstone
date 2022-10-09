@@ -1,4 +1,4 @@
 <div class="content" role="main">
-  <start-screen *ngIf="!gameStarted" (newSinglePlayerGameEvent)="startGame($event)"></start-screen>
+  <start-screen *ngIf="!gameStarted" (newSinglePlayerGameEvent)="startSinglePlayerGame($event)"></start-screen>
   <main-game-screen *ngIf="gameStarted"></main-game-screen>
 </div>

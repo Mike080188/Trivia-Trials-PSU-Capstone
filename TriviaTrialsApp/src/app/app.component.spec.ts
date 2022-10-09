@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MainGameScreenComponent } from './main-game-screen/main-game-screen.component';
 import { ScoreDisplayComponent } from './score-display/score-display.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
@@ -9,7 +10,7 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, HttpClientTestingModule ],
       declarations: [
         AppComponent,
         StartScreenComponent,
@@ -63,7 +64,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     // Start game with name 'Tester'
-    component.startGame('Tester');
+    component.startSinglePlayerGame('Tester');
     fixture.detectChanges();
 
     // Score number should be displayed as '0'

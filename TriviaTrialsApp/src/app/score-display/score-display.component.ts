@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { PlayerDetailsService } from 'app/player-details.service';
+import { PlayerDetailsService } from 'app/services/player-details.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,22 +9,22 @@ import { Subscription } from 'rxjs';
 })
 export class ScoreDisplayComponent {
 
-  @Input() playerName: string = "";
-  @Input() playerScore: number = 0;
+  // @Input() playerName: string = "";
+  // @Input() playerScore: number = 0;
 
-  constructor(private playerDetailsService: PlayerDetailsService) { }
+  constructor(public playerDetailsService: PlayerDetailsService) { }
 
   ngOnInit(): void {
-      //Subscribe to observables for name and score changes
-      this.playerDetailsService.nameSetSource.subscribe((name) => {
-          this.playerName = name;
-      });
-      this.playerDetailsService.scoreChangedSource.subscribe((score) => {
-        this.playerScore = score;
-    });
+    //   //Subscribe to observables for name and score changes
+    //   this.playerDetailsService.nameSetSource.subscribe((name) => {
+    //       this.playerName = name;
+    //   });
+    //   this.playerDetailsService.scoreChangedSource.subscribe((score) => {
+    //     this.playerScore = score;
+    // });
   }
 
-  get getPlayerDetailsService(): PlayerDetailsService {
-    return this.playerDetailsService;
-  }
+  // get getPlayerDetailsService(): PlayerDetailsService {
+  //   return this.playerDetailsService;
+  // }
 }

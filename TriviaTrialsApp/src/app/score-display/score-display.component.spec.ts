@@ -24,8 +24,8 @@ describe('ScoreDisplayComponent', () => {
 
   it('should display playerScore and playerName', () => {
     // Set player name and score in component
-    component.playerName = 'Tester';
-    component.playerScore = 44;
+    component.playerDetailsService.player.name = 'Tester';
+    component.playerDetailsService.player.score = 44;
     fixture.detectChanges();
 
     // Score number should be displayed as 44'
@@ -39,13 +39,13 @@ describe('ScoreDisplayComponent', () => {
     expect(scoreName).toEqual("Tester");
   });
 
-  it('should update playerScore and playerName when they are updated via shared service', () => {
-    // Set player name and score in the shared service
-    component.getPlayerDetailsService.nameSetSource.next('George');
-    component.getPlayerDetailsService.scoreChangedSource.next(55);
-    // Player name and score updated in component
-    expect(component.playerName).toBe('George');
-    expect(component.playerScore).toBe(55);
-  });
+  // it('should update playerScore and playerName when they are updated via shared service', () => {
+  //   // Set player name and score in the shared service
+  //   component.playerDetailsService.player.name= 'George';
+  //   component.playerDetailsService.player.score = 55;
+  //   // Player name and score updated in component
+  //   expect(component.playerDetailsService.player.name).toBe('George');
+  //   // expect(component.playerScore).toBe(55);
+  // });
 });
 ``
