@@ -1,0 +1,8 @@
+<div class="question">{{gameService.question.q}}</div>
+<!-- <div *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">{{(new Map(a)).get('answer')}}</div> -->
+<!-- <div *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">ttteeeessssttt</div> -->
+<mat-action-list>
+  <button mat-list-item class="answer" *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">{{a.answer}}</button>
+</mat-action-list>
+
+<!-- <div class="answer" *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">{{a.answer}}</div> -->
