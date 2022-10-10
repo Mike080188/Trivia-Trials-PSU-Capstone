@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Employee } from '../shared/employee';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Question } from '../model/question';
@@ -24,38 +23,6 @@ export class HttpApiServiceService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  // HttpClient API get() method => Fetch employee
-  // getQuestions(id: any): Observable<Question> {
-  //   return this.http
-  //     .get<Question>(this.apiURL)
-  //     .pipe(retry(1), catchError(this.handleError));
-  // }
-  // // HttpClient API post() method => Create employee
-  // createEmployee(employee: any): Observable<Question> {
-  //   return this.http
-  //     .post<Question>(
-  //       this.apiURL + '/employees',
-  //       JSON.stringify(employee),
-  //       this.httpOptions
-  //     )
-  //     .pipe(retry(1), catchError(this.handleError));
-  // }
-  // // HttpClient API put() method => Update employee
-  // updateEmployee(id: any, employee: any): Observable<Question> {
-  //   return this.http
-  //     .put<Question>(
-  //       this.apiURL + '/employees/' + id,
-  //       JSON.stringify(employee),
-  //       this.httpOptions
-  //     )
-  //     .pipe(retry(1), catchError(this.handleError));
-  // }
-  // // HttpClient API delete() method => Delete employee
-  // deleteEmployee(id: any) {
-  //   return this.http
-  //     .delete<Question>(this.apiURL + '/employees/' + id, this.httpOptions)
-  //     .pipe(retry(1), catchError(this.handleError));
-  // }
   // Error handling
   handleError(error: any) {
     let errorMessage = '';
