@@ -94,7 +94,7 @@ Resources:
       AuthorizationType: NONE
       HttpMethod: GET
       Integration:
-        IntegrationHttpMethod: GET
+        IntegrationHttpMethod: POST
         Type: AWS_PROXY
         Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${StartGameFunction.Arn}/invocations
       ResourceId: !GetAtt apiGateway.RootResourceId
@@ -127,7 +127,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: StartGame
       Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:us-east-1:049850382269:tnue03kxhg/*/POST/
+      SourceArn: arn:aws:execute-api:us-east-1:049850382269:47sdbk9dd7/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
