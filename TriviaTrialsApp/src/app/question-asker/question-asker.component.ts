@@ -12,9 +12,11 @@ import { SoundPlayerService } from 'app/services/sound-player.service';
 export class QuestionAskerComponent implements OnInit {
 
   @Input() question: Question;
-  // currentQuestion: number = 0;
 
-  constructor(public gameService: GameService, public soundPlayerService: SoundPlayerService) { }
+  constructor(
+      public gameService: GameService,
+      public soundPlayerService: SoundPlayerService
+  ) { }
 
   ngOnInit(): void {
     this.gameService.questionSource.subscribe((question) => {
@@ -29,17 +31,9 @@ export class QuestionAskerComponent implements OnInit {
     else {
       this.soundPlayerService.playAudio('incorrect')
     }
-    // this.playAudio();
   }
-  // playAudio(){
-  //   let audio = new Audio();
-  //   audio.src = "../../../assets/sounds/correct.wav";
-  //   audio.load();
-  //   audio.play();
-  // }
 
   // loadNextQuestion() {
-  //   this.currentQuestion++;
   // }
 
 }

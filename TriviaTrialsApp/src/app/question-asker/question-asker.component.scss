@@ -22,6 +22,7 @@
 
 .mat-list-base .mat-list-item {
   display: block;
+
   /* height: 48px; */
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   width: 100%;
@@ -41,5 +42,6 @@
 //   background-color: #ff1616;
 // }
 
-
-
+:host ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
+  justify-content: center;
+}

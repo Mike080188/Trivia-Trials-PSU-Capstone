@@ -9,7 +9,7 @@ import { Question } from '../model/question';
 })
 export class HttpApiServiceService {
 
-  apiURL = 'https://47sdbk9dd7.execute-api.us-east-1.amazonaws.com/TriviaTrialsApiGateway/';
+  apiURL = 'https://47sdbk9dd7.execute-api.us-east-1.amazonaws.com/TriviaTrialsApiGateway/'; // TODO use constant from config
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,7 @@ export class HttpApiServiceService {
       .get<Question[]>(this.apiURL)
       .pipe(retry(1), catchError(this.handleError));
   }
+
   // HttpClient API get() method => Fetch employee
   // getQuestions(id: any): Observable<Question> {
   //   return this.http
