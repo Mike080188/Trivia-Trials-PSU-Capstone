@@ -29,15 +29,8 @@ export class AppComponent implements OnInit{
   startSinglePlayerGame(name: string) {
     this.gameStarted = true;
     this.playerName = name;
-    // this.playerDetailsService.nameSetSource.next(this.playerName); // Send name to scoreboard
     this.playerDetailsService.player.name = this.playerName;
-    this.apiHttpService.getQuestions().subscribe((q) => {
-      this.questions = q;
-      // this.gameService.questionSource.next(this.questions[0]);
-      this.gameService.question = this.questions[0]
-      // this.playerDetailsService.incrementScore(3);
-    });
-    // this.playerDetailsService.incrementScore(5);
+    this.gameService.loadQuestions();
   }
 
 }
