@@ -10,7 +10,7 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, HttpClientTestingModule ],
+      imports: [FormsModule, HttpClientTestingModule],
       declarations: [
         AppComponent,
         StartScreenComponent,
@@ -34,7 +34,10 @@ describe('AppComponent', () => {
 
   it('Should start game when "Single Player Game" button is clicked', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const component = fixture.componentInstance;
     fixture.detectChanges();
+
+    spyOn(component.gameService, "loadQuestions").and.stub(); // don't call api
 
     // Start screen is present in DOM
     var startScreenDebugElement = fixture.debugElement.query(By.css('start-screen'));
@@ -62,6 +65,8 @@ describe('AppComponent', () => {
 
     const component = fixture.componentInstance;
     fixture.detectChanges();
+
+    spyOn(component.gameService, "loadQuestions").and.stub(); // don't call api
 
     // Start game with name 'Tester'
     component.startSinglePlayerGame('Tester');
