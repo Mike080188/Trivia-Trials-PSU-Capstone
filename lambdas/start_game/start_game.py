@@ -68,6 +68,27 @@ def handler(event, context):
                     'isCorrect': False
                 }
             ]
+        },
+        {
+            'q': 'What year was Jurassic Park released?',
+            'answers': [
+                {
+                    'answer': '1997',
+                    'isCorrect': False
+                },
+                {
+                    'answer': '1995',
+                    'isCorrect': False
+                },
+                {
+                    'answer': '1993',
+                    'isCorrect': True
+                },
+                {
+                    'answer': '1991',
+                    'isCorrect': False
+                }
+            ]
         }
     ]
 
