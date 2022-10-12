@@ -45,7 +45,7 @@ describe('QuestionAskerComponent', () => {
     expect(component.soundPlayerService.playAudio).toHaveBeenCalledWith("incorrect");
   });
 
-  it('should wait 2.5 seconds before staring next round', () => {
+  it('should wait 2.5 seconds after question answewred before staring next round', () => {
     // Set answer as incorrect
     var ans = new Answer();
     ans.answer = "Test Answer";

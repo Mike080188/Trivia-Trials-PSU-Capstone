@@ -14,7 +14,6 @@ export class AppComponent implements OnInit{
   title = 'TriviaTrialsApp';
   gameStarted = false;
   playerName = "";
-  // score = 0;
   public questions: Question[];
 
   ngOnInit() {
@@ -23,7 +22,7 @@ export class AppComponent implements OnInit{
   constructor(
     private playerDetailsService: PlayerDetailsService,
     private apiHttpService: HttpApiServiceService,
-    private gameService: GameService,
+    public gameService: GameService,
   ) {}
 
   startSinglePlayerGame(name: string) {
