@@ -41,7 +41,37 @@
 // .mat-list-item:visited {
 //   background-color: #ff1616;
 // }
+.answer[aria-selected="true"] {
+  background-color: #65676b;
+}
 
 :host ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
   justify-content: center;
 }
+
+// :host ::ng-deep .mat-list-item-content.green-background[aria-selected="true"] {
+//   background-color: #07ff07;
+// }
+// :host ::ng-deep mat-list-item.red-background[aria-selected="true"] {
+//   background-color: #ff0000;
+// }
+// answer.green-background {
+//   background-color: #07ff07;
+// }
+
+.mat-list-item.green-background:focus {
+  background: #3cff00;
+}
+
+.mat-list-item.red-background:focus {
+  background: #ff1212;
+}
+
+// green-background {
+//   background-color: #07ff07;
+// }
+
+// red-background {
+//   background-color: #ff0000;
+// }
+
