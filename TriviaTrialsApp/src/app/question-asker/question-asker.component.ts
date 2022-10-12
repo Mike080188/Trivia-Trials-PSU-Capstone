@@ -3,6 +3,8 @@ import { GameService } from 'app/services/game.service';
 import { Question } from 'app/model/question';
 import { Answer } from 'app/model/answer';
 import { SoundPlayerService } from 'app/services/sound-player.service';
+import { PlayerDetailsService } from 'app/services/player-details.service';
+import { CommonService } from 'app/services/common.service';
 
 @Component({
   selector: 'question-asker',
@@ -12,10 +14,13 @@ import { SoundPlayerService } from 'app/services/sound-player.service';
 export class QuestionAskerComponent implements OnInit {
 
   @Input() question: Question;
+  answerWasChosen: boolean = false;
 
   constructor(
       public gameService: GameService,
-      public soundPlayerService: SoundPlayerService
+      public soundPlayerService: SoundPlayerService,
+      public playerDetailService: PlayerDetailsService,
+      public commonService:CommonService
   ) { }
 
   ngOnInit(): void {
@@ -24,16 +29,21 @@ export class QuestionAskerComponent implements OnInit {
   });
   }
 
-  answerQuestion(answer: Answer) {
+  async answerQuestion(answer: Answer) {
+    this.answerWasChosen = true;
     if(answer.isCorrect) {
       this.soundPlayerService.playAudio('correct')
+      // var roundScore = this.evaluateCorrectAnswer()
+      this.playerDetailService.incrementScore(1)
     }
     else {
       this.soundPlayerService.playAudio('incorrect')
     }
+    await this.commonService.delay(2500);
+    this.gameService.nextRound();
+    this.answerWasChosen = false;
   }
-
-  // loadNextQuestion() {
+  // evaluateCorrectAnswer() {
+  //   throw new Error('Method not implemented.');
   // }
-
 }

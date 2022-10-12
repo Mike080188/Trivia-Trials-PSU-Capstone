@@ -44,4 +44,16 @@ describe('QuestionAskerComponent', () => {
     component.answerQuestion(ans);
     expect(component.soundPlayerService.playAudio).toHaveBeenCalledWith("incorrect");
   });
+
+  it('should wait 2.5 seconds before staring next round', () => {
+    // Set answer as incorrect
+    var ans = new Answer();
+    ans.answer = "Test Answer";
+    ans.isCorrect = true;
+    spyOn(component.commonService, "delay").and.stub();
+    spyOn(component.soundPlayerService, "playAudio").and.stub();
+    component.answerQuestion(ans);
+
+    expect(component.commonService.delay).toHaveBeenCalledWith(2500);
+  });
 });

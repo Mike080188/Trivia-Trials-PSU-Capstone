@@ -1,8 +1,11 @@
-<div class="question">{{gameService.question.q}}</div>
-<!-- <div *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">{{(new Map(a)).get('answer')}}</div> -->
-<!-- <div *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">ttteeeessssttt</div> -->
-<mat-action-list>
-  <button mat-list-item class="answer" *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">{{a.answer}}</button>
-</mat-action-list>
+<div class="question">{{gameService.questions[gameService.currentQuestion].q}}</div>
 
-<!-- <div class="answer" *ngFor="let a of gameService.question.answers" (click)="answerQuestion(a)">{{a.answer}}</div> -->
+<mat-action-list>
+  <button mat-list-item class="answer"
+    [ngClass]="{'red-background': !a.isCorrect, 'green-background': a.isCorrect}"
+    *ngFor="let a of gameService.questions[gameService.currentQuestion].answers"
+    [disabled]="answerWasChosen"
+    (click)="answerQuestion(a)">
+    {{a.answer}}
+  </button>
+</mat-action-list>
