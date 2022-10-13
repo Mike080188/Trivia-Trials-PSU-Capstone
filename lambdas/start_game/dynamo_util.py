@@ -16,7 +16,7 @@ def get_max_question_id():
 
     return max_id
 
-def get_random_questions_resource(num_questions):
+def get_random_questions(num_questions) -> list:
     questions = []
 
     # table = dynamodb.Table('Questions')
