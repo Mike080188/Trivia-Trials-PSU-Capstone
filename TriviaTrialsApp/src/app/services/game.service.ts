@@ -17,7 +17,7 @@ export class GameService {
   questions: Question[] = [new Question];
   currentQuestion: number = 0;
   gameOn: boolean = true;
-  maxQuestions: number = 2;
+  maxQuestions: number = 3; // will be 10
   round: number = 1;
 
   constructor(private apiHttpService: HttpApiServiceService) { }

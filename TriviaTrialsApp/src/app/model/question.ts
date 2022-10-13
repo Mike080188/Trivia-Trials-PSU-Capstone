@@ -1,6 +1,6 @@
 import { Answer } from "./answer";
 
 export class Question {
-  q: string;
+  question: string;
   answers: Answer[]
 }
