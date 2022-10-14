@@ -3,4 +3,5 @@ pytest
 boto3
 pytest
 pytest-cov
+moto
 

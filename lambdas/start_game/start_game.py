@@ -1,82 +1,34 @@
 import json
 import requests
 import boto3
+from dynamo_util import get_random_questions
+import logging
+
+logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 def handler(event, context):
-    # p_version = pd.__version__
-    # r = requests.get("https://www.google.com")
-    # status_code = r.status_code
 
-    # return_statement = "Google status code: " + status_code + "\nPandas version: " + p_version
-    # body = [
-    #     {
-    #         'q': 'Who killed Alexander Hamilton?',
-    #         'correctAnswer': 'Vice President Aaaron Burr',
-    #         'wrongAnswer1': 'Patrick Henry',
-    #         'wrongAnswer2': 'Himself',
-    #         'wrongAnswer3': 'Benedict Arnold',
-    #     },
-    #     {
-    #         'q': 'What is 37 x 4 x 5?',
-    #         'correctAnswer': '740',
-    #         'wrongAnswer1': '620',
-    #         'wrongAnswer2': '988',
-    #         'wrongAnswer3': '580',
-    #     }
-    # ]
+    try:
+        questions = get_random_questions(6)
 
+        logger.info('returning following questions: ' + str(questions))
 
-    body = [
-        {
-            'q': 'Who killed Alexander Hamilton?',
-            'answers': [
-                {
-                    'answer': 'Vice President Aaaron Burr',
-                    'isCorrect': True
-                },
-                {
-                    'answer': 'Patrick Henry',
-                    'isCorrect': False
-                },
-                {
-                    'answer': 'Himself',
-                    'isCorrect': False
-                },
-                {
-                    'answer': 'Benedict Arnold',
-                    'isCorrect': False
-                }
-            ]
-        },
-        {
-            'q': 'What is 37 x 4 x 5?',
-            'answers': [
-                {
-                    'answer': '740',
-                    'isCorrect': True
-                },
-                {
-                    'answer': '620',
-                    'isCorrect': False
-                },
-                {
-                    'answer': '988',
-                    'isCorrect': False
-                },
-                {
-                    'answer': '580',
-                    'isCorrect': False
-                }
-            ]
+        return {
+            "statusCode": 200,
+            "body": json.dumps(questions),
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
         }
-    ]
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps(body),
-        'headers': {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        },
-    }
-    # return "Hello World!!"
+    except Exception as e:
+        logger.error('An error occured: ' + str(e))
+        return {
+            "statusCode": 500,
+            "body": json.dumps('The following error occured: ' + str(e)),
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+        }
