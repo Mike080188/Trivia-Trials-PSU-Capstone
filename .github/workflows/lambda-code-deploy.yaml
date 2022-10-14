@@ -30,8 +30,8 @@ jobs:
 
     - name: Install dependencies with LambCI
       run: |
-        cd lambdas/start_game/
-        pip install -r requirements.txt -t .
+        cd lambdas/
+        pip install -r start_game/requirements.txt -t .
 
     - name: Run Unit Tests
       run: |
