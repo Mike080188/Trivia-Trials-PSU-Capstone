@@ -7,10 +7,6 @@ import logging
 logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-def get_max_question_id():
-    # Get Question 1 holding table count
-    resp = questions_table.query(KeyConditionExpression=Key('QuestionId').eq('1'))
-    question = resp['Items'][0]
 
 MAX_QUESTION_ID = 6
 
