@@ -33,7 +33,8 @@ def get_random_questions(num_questions) -> list:
 
         # Get Question based on random id
         resp = questions_table.query(KeyConditionExpression=Key('QuestionId').eq(str(rand)))
-        question = resp['Items']
+        print('response from dynamo: ' + str(resp))
+        question = resp['Items'][0]
 
         questions.append(question)
 
