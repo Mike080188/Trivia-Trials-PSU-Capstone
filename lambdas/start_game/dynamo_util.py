@@ -4,6 +4,7 @@ import random
 import boto3, json
 from boto3.dynamodb.conditions import Key
 
+MAX_QUESTION_ID = 4
 dynamodb = boto3.resource('dynamodb')
 questions_table = table = dynamodb.Table('Questions')
 
@@ -21,11 +22,11 @@ def get_random_questions(num_questions) -> list:
 
     # table = dynamodb.Table('Questions')
     counted_ids = []
-    max_id = get_max_question_id()
+    # max_id = get_max_question_id()
 
     # Loop until desired number of unique questions
-    while len(counted_ids) < num_questions-1:
-        rand = random.randint(2,max_id)
+    while len(counted_ids) < num_questions:
+        rand = random.randint(2,MAX_QUESTION_ID)
         # Don't want duplicates
         if(rand in counted_ids): 
             continue
