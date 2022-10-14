@@ -30,13 +30,13 @@ jobs:
 
     - name: Install dependencies with LambCI
       run: |
-        cd lambdas/
-        pip install -r start_game/requirements.txt -t .
+        cd lambdas/start_game/
+        pip install -r requirements.txt -t .
 
     - name: Run Unit Tests
       run: |
-        cd lambdas/
-        python -m pytest --cov-report term --cov=start_game start_game/tests
+        cd lambdas/start_game/
+        python -m pytest --cov-report term --cov=start_game  tests/
 
     - name: Bundle function with dependencies
       run: |
