@@ -70,7 +70,7 @@ def handler(event, context):
             ]
         }
     ]
-    questions = dynamo_util.get_random_questions(3)
+    questions = dynamo_util.get_random_questions(6)
 
     print('returning following questions: ' + str(questions))
 
