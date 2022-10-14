@@ -72,9 +72,11 @@ def handler(event, context):
     ]
     questions = dynamo_util.get_random_questions(3)
 
+    print('returning following questions: ' + str(questions))
+
     return {
         "statusCode": 200,
-        "body": json.dumps(body),
+        "body": json.dumps(questions),
         'headers': {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'

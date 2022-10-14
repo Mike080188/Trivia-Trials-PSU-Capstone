@@ -21,11 +21,11 @@ def get_random_questions(num_questions) -> list:
 
     # table = dynamodb.Table('Questions')
     counted_ids = []
-    total_questions = get_max_question_id()
+    max_id = get_max_question_id()
 
     # Loop until desired number of unique questions
-    while len(counted_ids) < num_questions:
-        rand = random.randint(2,total_questions)
+    while len(counted_ids) < num_questions-1:
+        rand = random.randint(2,max_id)
         # Don't want duplicates
         if(rand in counted_ids): 
             continue
@@ -39,4 +39,5 @@ def get_random_questions(num_questions) -> list:
 
     return questions
 
-# print(get_random_questions_resource(3))
+# x = get_random_questions(4)
+# print(x)
