@@ -36,7 +36,7 @@ jobs:
     - name: Run Unit Tests
       run: |
         cd lambdas/start_game/
-        python -m pytest --cov-report term --cov=start_game/tests/
+        python -m pytest --cov-report term --cov=start_game start_game/tests
 
     - name: Bundle function with dependencies
       run: |
