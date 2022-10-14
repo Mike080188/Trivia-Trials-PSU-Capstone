@@ -1,7 +1,6 @@
-import os
 import boto3
 import random
-import boto3, json
+import boto3
 from boto3.dynamodb.conditions import Key
 import logging
 
@@ -15,11 +14,10 @@ def get_max_question_id():
 
 MAX_QUESTION_ID = 6
 
-dynamodb = boto3.resource('dynamodb')
-questions_table = table = dynamodb.Table('Questions')
-
 def get_random_questions(num_questions) -> list:
-    """Returns 10 unique random questions"""
+    """Returns unique random questions from Dynamo"""
+    dynamodb = boto3.resource('dynamodb')
+    questions_table = dynamodb.Table('Questions')
     questions = []
     counted_ids = []
 
