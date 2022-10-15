@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-MAX_QUESTION_ID = 6
+MAX_QUESTION_ID = 14
 
 def get_random_questions(num_questions) -> list:
     """Returns unique random questions from Dynamo"""

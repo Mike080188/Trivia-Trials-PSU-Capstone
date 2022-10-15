@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 def handler(event, context):
 
     try:
-        questions = get_random_questions(6)
+        questions = get_random_questions(10)
 
         logger.info('returning following questions: ' + str(questions))
 
