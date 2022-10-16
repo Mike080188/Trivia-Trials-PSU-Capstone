@@ -1,0 +1,5 @@
+
+*.pyc
+lambdas/start_game/tests/__pycache__/test_start_game.cpython-39-pytest-7.1.3.pyc.35200
+lambdas/.coverage
+.vscode/settings.json
