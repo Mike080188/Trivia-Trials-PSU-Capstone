@@ -12,6 +12,7 @@ describe('QuestionAskerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      declarations: [ QuestionAskerComponent ],
       imports: [HttpClientTestingModule]
     })
     .compileComponents();
@@ -45,7 +46,7 @@ describe('QuestionAskerComponent', () => {
     expect(component.soundPlayerService.playAudio).toHaveBeenCalledWith("incorrect");
   });
 
-  it('should wait 2.5 seconds after question answewred before staring next round', () => {
+  it('should wait 2.5 seconds after question answered before staring next round', () => {
     // Set answer as incorrect
     var ans = new Answer();
     ans.answer = "Test Answer";
@@ -55,5 +56,29 @@ describe('QuestionAskerComponent', () => {
     component.answerQuestion(ans);
 
     expect(component.commonService.delay).toHaveBeenCalledWith(2500);
+  });
+
+
+  it('should display question and 4 answers from game service', () => {
+    // Setup gameService question which this is bound to
+    component.gameService.currentQuestion = 0;
+    component.gameService.questions = [
+      { question: "Q1",
+        answers: [
+          {answer: "A1", isCorrect: true},
+          {answer: "A2", isCorrect: false},
+          {answer: "A3", isCorrect: false},
+          {answer: "A4", isCorrect: false}
+      ]}
+  ];
+
+    fixture.detectChanges();
+
+    var questionElement = fixture.debugElement.query(By.css('.question'));
+    var question = questionElement.nativeElement.textContent
+    expect(question).toEqual("Q1");
+
+    var answersArray = fixture.debugElement.queryAll(By.css('.answer'));
+    expect(answersArray.length).toEqual(4);
   });
 });
