@@ -11,6 +11,12 @@ import { Question } from './model/question';
   providers: [PlayerDetailsService, HttpApiServiceService, GameService]
 })
 export class AppComponent implements OnInit{
+  commonService(commonService: any, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
+  soundPlayerService(soundPlayerService: any, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
   title = 'TriviaTrialsApp';
   gameStarted = false;
   playerName = "";

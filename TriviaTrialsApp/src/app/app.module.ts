@@ -9,6 +9,7 @@ import { ScoreDisplayComponent } from './score-display/score-display.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Constants } from './config/constants';
 import { QuestionAskerComponent } from './question-asker/question-asker.component';
+import { TimerComponent } from './timer/timer.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { QuestionAskerComponent } from './question-asker/question-asker.componen
     StartScreenComponent,
     MainGameScreenComponent,
     ScoreDisplayComponent,
-    QuestionAskerComponent
+    QuestionAskerComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
