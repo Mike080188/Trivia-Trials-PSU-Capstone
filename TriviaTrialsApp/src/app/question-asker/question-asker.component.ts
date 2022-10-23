@@ -14,7 +14,7 @@ import { CommonService } from 'app/services/common.service';
 export class QuestionAskerComponent implements OnInit {
 
   @Input() question: Question;
-  answerWasChosen: boolean = false;
+  // answersDisabled: boolean = false;
 
   constructor(
       public gameService: GameService,
@@ -30,7 +30,7 @@ export class QuestionAskerComponent implements OnInit {
   }
 
   async answerQuestion(answer: Answer) {
-    this.answerWasChosen = true;
+    this.gameService.answersDisabled = true;
     if(answer.isCorrect) {
       this.soundPlayerService.playAudio('correct')
       // var roundScore = this.evaluateCorrectAnswer()
@@ -39,9 +39,9 @@ export class QuestionAskerComponent implements OnInit {
     else {
       this.soundPlayerService.playAudio('incorrect')
     }
-    await this.commonService.delay(2500);
+    // await this.commonService.delay(2500);
     this.gameService.nextRound();
-    this.answerWasChosen = false;
+    // this.answersDisabled = false;
   }
   // evaluateCorrectAnswer() {
   //   throw new Error('Method not implemented.');

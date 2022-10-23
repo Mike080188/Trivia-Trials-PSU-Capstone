@@ -82,5 +82,29 @@ describe('AppComponent', () => {
     var scoreName = scoreNameElement.nativeElement.textContent
     expect(scoreName).toEqual("Tester");
   });
+
+
+  it('Should display score during the game', async () => {
+    const fixture = TestBed.createComponent(AppComponent);
+
+    const component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    spyOn(component.gameService, "loadQuestions").and.stub(); // don't call api
+
+    // Start game with name 'Tester'
+    component.startSinglePlayerGame('Tester');
+    fixture.detectChanges();
+
+    // Score number should be displayed as '0'
+    var scoreNumberElement = fixture.debugElement.query(By.css('.score-number'));
+    var scoreNumber = scoreNumberElement.nativeElement.textContent
+    expect(scoreNumber).toEqual("0");
+
+    // Name should be displayed as 'Tester'
+    var scoreNameElement = fixture.debugElement.query(By.css('.score-name'));
+    var scoreName = scoreNameElement.nativeElement.textContent
+    expect(scoreName).toEqual("Tester");
+  });
 });
 

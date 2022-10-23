@@ -56,13 +56,13 @@ def setup():
 @mock_dynamodb
 def test_get_random_questions():
     setup()
-    dynamo_util.MAX_QUESTION_ID = 6
+    dynamo_util.MAX_QUESTION_ID = 6 # 6 questions have been loaded in the mock db
     response = dynamo_util.get_random_questions(3)
 
     unique_questions = set()
     for question in response:
         unique_questions.add(question['Question'])
 
-    # Assert there were no duplicates and length is 6. Extracting all question
+    # Assert there were no duplicates and length is 3. Extracting all questions
     # and converting to a set would remove any duplicates, changing the length
     assert 3 == len(unique_questions)

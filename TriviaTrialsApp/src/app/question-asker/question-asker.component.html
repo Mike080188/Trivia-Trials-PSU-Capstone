@@ -4,7 +4,7 @@
   <button mat-list-item class="answer"
     [ngClass]="{'red-background': !a.isCorrect, 'green-background': a.isCorrect}"
     *ngFor="let a of gameService.questions[gameService.currentQuestion].answers"
-    [disabled]="answerWasChosen"
+    [disabled]="this.gameService.answersDisabled || gameService.roundTimer == 0"
     (click)="answerQuestion(a)">
     {{a.answer}}
   </button>

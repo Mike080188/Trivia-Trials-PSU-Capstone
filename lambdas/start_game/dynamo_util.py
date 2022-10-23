@@ -7,6 +7,10 @@ import logging
 logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+session = boto3.Session(
+    aws_access_key_id='AKIAQXG2QO662RS7C5OB', # os.environ['ACCESS_KEY'],
+    aws_secret_access_key='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' # os.environ['SECRET_KEY'],
+)
 
 MAX_QUESTION_ID = 14
 
