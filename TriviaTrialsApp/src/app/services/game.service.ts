@@ -21,7 +21,7 @@ export class GameService {
   gameOn: boolean = false;
   round: number = 1;
   roundTimer: number = 30;
-  roundTimerStart: number = 30;
+  readonly roundTimerStart: number = 30;
   counter$: Observable<number>;
   interval: any;
   answersDisabled: boolean = false;
@@ -45,7 +45,7 @@ export class GameService {
   }
 
   setTimer() {
-    this.roundTimer = 15;
+    this.roundTimer = this.roundTimerStart;
     this.interval = setInterval(() => this.checkTime(), 1000);
   }
 
