@@ -13,8 +13,8 @@ import { CommonService } from 'app/services/common.service';
 })
 export class QuestionAskerComponent implements OnInit {
 
-  @Input() question: Question;
-  answerWasChosen: boolean = false;
+  // @Input() question: Question;
+  answersDisabled: boolean = false;
 
   constructor(
       public gameService: GameService,
@@ -24,13 +24,13 @@ export class QuestionAskerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.gameService.questionSource.subscribe((question) => {
-      this.question = question;
-  });
+  //   this.gameService.questionSource.subscribe((question) => {
+  //     this.question = question;
+  // });
   }
 
   async answerQuestion(answer: Answer) {
-    this.answerWasChosen = true;
+    this.answersDisabled = true;
     if(answer.isCorrect) {
       this.soundPlayerService.playAudio('correct')
       // var roundScore = this.evaluateCorrectAnswer()
@@ -39,11 +39,6 @@ export class QuestionAskerComponent implements OnInit {
     else {
       this.soundPlayerService.playAudio('incorrect')
     }
-    await this.commonService.delay(2500);
     this.gameService.nextRound();
-    this.answerWasChosen = false;
   }
-  // evaluateCorrectAnswer() {
-  //   throw new Error('Method not implemented.');
-  // }
 }
