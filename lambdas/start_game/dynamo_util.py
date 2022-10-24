@@ -7,12 +7,7 @@ import logging
 logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-session = boto3.Session(
-    aws_access_key_id='AKIAQXG2QO662RS7C5OB', # os.environ['ACCESS_KEY'],
-    aws_secret_access_key='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' # os.environ['SECRET_KEY'],
-)
-
-MAX_QUESTION_ID = 14
+MAX_QUESTION_ID = 15
 
 def get_random_questions(num_questions) -> list:
     """Returns unique random questions from Dynamo"""
@@ -27,7 +22,7 @@ def get_random_questions(num_questions) -> list:
     while len(counted_ids) < num_questions:
         rand = random.randint(1,MAX_QUESTION_ID)
         # Don't want duplicates
-        if(rand in counted_ids): 
+        if(rand in counted_ids):
             continue
         counted_ids.append(rand)
 
