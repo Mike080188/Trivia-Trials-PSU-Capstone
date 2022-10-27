@@ -5,6 +5,7 @@ import { CommonService } from './common.service';
 import { HttpApiServiceService } from './http-api-service.service';
 import { Observable } from 'rxjs';
 import { SoundPlayerService } from './sound-player.service';
+import { Player } from 'app/model/player';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,19 @@ export class GameService {
   interval: any;
   answersDisabled: boolean = false;
 
+  player: Player = new Player();
+
+  incrementScore(amount: number) {
+    this.player.score += amount;
+  }
+
   constructor(
       private apiHttpService: HttpApiServiceService,
       public soundPlayerService: SoundPlayerService,
       public commonService: CommonService
-  ) {}
+  ) {
+    this.player.score = 0;
+  }
 
   public async nextRound() {
     clearInterval(this.interval);

@@ -3,7 +3,6 @@ import { GameService } from 'app/services/game.service';
 import { Question } from 'app/model/question';
 import { Answer } from 'app/model/answer';
 import { SoundPlayerService } from 'app/services/sound-player.service';
-import { PlayerDetailsService } from 'app/services/player-details.service';
 import { CommonService } from 'app/services/common.service';
 
 @Component({
@@ -14,12 +13,10 @@ import { CommonService } from 'app/services/common.service';
 export class QuestionAskerComponent implements OnInit {
 
   @Input() question: Question;
-  // answersDisabled: boolean = false;
 
   constructor(
       public gameService: GameService,
       public soundPlayerService: SoundPlayerService,
-      public playerDetailService: PlayerDetailsService,
       public commonService:CommonService
   ) { }
 
@@ -34,7 +31,7 @@ export class QuestionAskerComponent implements OnInit {
     if(answer.isCorrect) {
       this.soundPlayerService.playAudio('correct')
       // var roundScore = this.evaluateCorrectAnswer()
-      this.playerDetailService.incrementScore(1)
+      this.gameService.incrementScore(1)
     }
     else {
       this.soundPlayerService.playAudio('incorrect')

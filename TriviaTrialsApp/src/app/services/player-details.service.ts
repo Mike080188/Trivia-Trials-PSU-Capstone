@@ -15,14 +15,13 @@ export class PlayerDetailsService {
   // scoreChangedSource: BehaviorSubject<number> = new BehaviorSubject(0);
 
   // score: number = 0;
-  player: Player = new Player();
+  // player: Player = new Player();
 
-  constructor() {
-    this.player.score = 0;
-  }
+  // constructor() {
+  //   this.player.score = 0;
+  // }
 
-  incrementScore(amount: number) {
-    this.player.score += amount;
-
-  }
+  // incrementScore(amount: number) {
+  //   this.player.score += amount;
+  // }
 }

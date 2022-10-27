@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -9,7 +10,8 @@ describe('ScoreDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScoreDisplayComponent ]
+      declarations: [ ScoreDisplayComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
 
@@ -24,8 +26,8 @@ describe('ScoreDisplayComponent', () => {
 
   it('should display playerScore and playerName', () => {
     // Set player name and score in component
-    component.playerDetailsService.player.name = 'Tester';
-    component.playerDetailsService.player.score = 44;
+    component.gameService.player.name = 'Tester';
+    component.gameService.player.score = 44;
     fixture.detectChanges();
 
     // Score number should be displayed as 44'
@@ -41,11 +43,11 @@ describe('ScoreDisplayComponent', () => {
 
   // it('should update playerScore and playerName when they are updated via shared service', () => {
   //   // Set player name and score in the shared service
-  //   component.playerDetailsService.player.name= 'George';
-  //   component.playerDetailsService.player.score = 55;
+  //   component.gameService.player.name= 'George';
+  //   component.gameService.player.score = 55;
   //   // Player name and score updated in component
-  //   expect(component.playerDetailsService.player.name).toBe('George');
-  //   // expect(component.playerScore).toBe(55);
+  //   expect(component.gameService.player.name).toBe('George');
+  //   expect(component.gameService.player.score).toBe(55);
   // });
 });
 ``
