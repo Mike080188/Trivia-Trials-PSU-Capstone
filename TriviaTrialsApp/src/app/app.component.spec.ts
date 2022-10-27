@@ -26,12 +26,6 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'TriviaTrialsApp'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('TriviaTrialsApp');
-  });
-
   it('Should start game when "Single Player Game" button is clicked', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const component = fixture.componentInstance;
