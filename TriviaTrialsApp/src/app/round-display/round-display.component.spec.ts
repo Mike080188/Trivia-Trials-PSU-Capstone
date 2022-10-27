@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoundDisplayComponent } from './round-display.component';
@@ -8,7 +9,8 @@ describe('RoundDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoundDisplayComponent ]
+      declarations: [ RoundDisplayComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
 
