@@ -18,14 +18,16 @@ export class GameService {
 
   questions: Question[] = [new Question];
   currentQuestion: number = 0;
-  maxQuestions: number = 10;
+  maxQuestions: number = 4;
   gameOn: boolean = false;
   round: number = 1;
-  roundTimer: number = 30;
-  readonly roundTimerStart: number = 30;
+  roundTimer: number = 20;
+  readonly roundTimerStart: number = 20;
   counter$: Observable<number>;
   interval: any;
   answersDisabled: boolean = false;
+  gameOver: boolean = false;
+
 
   player: Player = new Player();
 
@@ -42,6 +44,7 @@ export class GameService {
   }
 
   public async nextRound() {
+
     clearInterval(this.interval);
     await this.commonService.delay(2500);
     this.currentQuestion < (this.maxQuestions - 1) ? this.currentQuestion += 1: this.endGame();
@@ -49,6 +52,14 @@ export class GameService {
     this.startRound();
   }
   async startRound() {
+    clearInterval(this.interval);
+    if (this.gameOver) {
+      return
+    }
+    // Hide question asker for 2.5 seconds just displaying new round number
+    this.gameOn = false;
+    await this.commonService.delay(2500);
+    this.gameOn = true;
     this.answersDisabled = false;
     this.setTimer();
   }
@@ -70,6 +81,7 @@ export class GameService {
 
   public endGame() {
     console.log("game over")
+    this.gameOver = true;
     this.gameOn = false;
     clearInterval(this.interval);
   }
@@ -78,7 +90,6 @@ export class GameService {
     this.apiHttpService.getQuestions().subscribe((q) => {
       this.questions = q;
       this.startRound();
-      this.gameOn = true;
     });
   }
 }
