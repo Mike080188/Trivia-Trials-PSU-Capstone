@@ -18,7 +18,7 @@ export class GameService {
 
   questions: Question[] = [new Question];
   currentQuestion: number = 0;
-  maxQuestions: number = 4;
+  maxQuestions: number = 10;
   gameOn: boolean = false;
   round: number = 1;
   roundTimer: number = 20;
