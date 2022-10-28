@@ -20,6 +20,10 @@ describe('QuestionAskerComponent', () => {
     fixture = TestBed.createComponent(QuestionAskerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    spyOn(component.gameService, "nextRound").and.stub(); // don't call api
+    spyOn(component.gameService.soundPlayerService, "playAudio").and.stub(); // don't play audio
+    spyOn(component.commonService, "delay").and.stub();
+
   });
 
   it('should create', () => {
@@ -31,7 +35,7 @@ describe('QuestionAskerComponent', () => {
     var ans = new Answer();
     ans.answer = "Test Answer";
     ans.isCorrect = true;
-    spyOn(component.soundPlayerService, "playAudio").and.stub();
+    // spyOn(component.soundPlayerService, "playAudio").and.stub();
     component.answerQuestion(ans);
     expect(component.soundPlayerService.playAudio).toHaveBeenCalledWith("correct");
   });
@@ -41,23 +45,10 @@ describe('QuestionAskerComponent', () => {
     var ans = new Answer();
     ans.answer = "Test Answer";
     ans.isCorrect = false;
-    spyOn(component.soundPlayerService, "playAudio").and.stub();
+    // spyOn(component.soundPlayerService, "playAudio").and.stub();
     component.answerQuestion(ans);
     expect(component.soundPlayerService.playAudio).toHaveBeenCalledWith("incorrect");
   });
-
-  it('should wait 2.5 seconds after question answered before staring next round', () => {
-    // Set answer as incorrect
-    var ans = new Answer();
-    ans.answer = "Test Answer";
-    ans.isCorrect = true;
-    spyOn(component.commonService, "delay").and.stub();
-    spyOn(component.soundPlayerService, "playAudio").and.stub();
-    component.answerQuestion(ans);
-
-    expect(component.commonService.delay).toHaveBeenCalledWith(2500);
-  });
-
 
   it('should display question and 4 answers from game service', () => {
     // Setup gameService question which this is bound to

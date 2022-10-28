@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Constants } from './config/constants';
 import { QuestionAskerComponent } from './question-asker/question-asker.component';
 import { TimerComponent } from './timer/timer.component';
+import { RoundDisplayComponent } from './round-display/round-display.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TimerComponent } from './timer/timer.component';
     MainGameScreenComponent,
     ScoreDisplayComponent,
     QuestionAskerComponent,
-    TimerComponent
+    TimerComponent,
+    RoundDisplayComponent
   ],
   imports: [
     BrowserModule,
