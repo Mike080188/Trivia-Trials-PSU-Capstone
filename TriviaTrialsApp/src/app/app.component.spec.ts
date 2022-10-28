@@ -32,6 +32,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     spyOn(component.gameService, "loadQuestions").and.stub(); // don't call api
+    spyOn(component.gameService.soundPlayerService, "playAudio").and.stub(); // don't play audio
 
     // Start screen is present in DOM
     var startScreenDebugElement = fixture.debugElement.query(By.css('start-screen'));
@@ -61,6 +62,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     spyOn(component.gameService, "loadQuestions").and.stub(); // don't call api
+    spyOn(component.gameService.soundPlayerService, "playAudio").and.stub(); // don't play audio
 
     // Start game with name 'Tester'
     component.startSinglePlayerGame('Tester');
@@ -85,6 +87,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
 
     spyOn(component.gameService, "loadQuestions").and.stub(); // don't call api
+    spyOn(component.gameService.soundPlayerService, "playAudio").and.stub(); // don't play audio
 
     // Start game with name 'Tester'
     component.startSinglePlayerGame('Tester');
@@ -100,5 +103,26 @@ describe('AppComponent', () => {
     var scoreName = scoreNameElement.nativeElement.textContent
     expect(scoreName).toEqual("Tester");
   });
+
+  // it('Should display round number during the game', async () => {
+  //   const fixture = TestBed.createComponent(AppComponent);
+
+  //   const component = fixture.componentInstance;
+  //   fixture.detectChanges();
+
+  //   spyOn(component.gameService, "loadQuestions").and.stub(); // don't call api
+
+  //   component.gameService.round = 4;
+  //   component.gameService.gameOn = true;
+
+  //   // Start game with name 'Tester'
+  //   component.startSinglePlayerGame('Tester');
+  //   fixture.detectChanges();
+
+  //   // Round was set to four, so should display 'Round: 4'
+  //   var roundElement = fixture.debugElement.query(By.css('.round'));
+  //   var roundText = roundElement.nativeElement.textContent
+  //   expect(roundText.trim()).toEqual("Round: 4");
+  // });
 });
 
