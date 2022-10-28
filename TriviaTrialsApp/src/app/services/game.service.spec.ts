@@ -31,4 +31,18 @@ describe('GameService', () => {
     // Game moves to next round
     expect(service.nextRound).toHaveBeenCalled();
   });
+
+  it('should display round number for 2.5 seconds before showing question', async ()  => {
+    spyOn(service.soundPlayerService, "playAudio").and.stub();
+    spyOn(service.commonService, "delay").and.stub();
+    spyOn(service, "setTimer").and.stub();
+
+    service.gameOn = false;
+
+    await service.startRound();
+    // // 2.5 seconds waited
+    expect(service.commonService.delay).toHaveBeenCalledWith(2500);
+    // // gameOn will display the question-asker again
+    expect(service.gameOn).toBe(true);
+  });
 });
