@@ -31,20 +31,22 @@ export class GameService {
 
   player: Player = new Player();
 
-  incrementScore(amount: number) {
-    this.player.score += amount;
-  }
 
   constructor(
-      private apiHttpService: HttpApiServiceService,
-      public soundPlayerService: SoundPlayerService,
-      public commonService: CommonService
-  ) {
-    this.player.score = 0;
+    private apiHttpService: HttpApiServiceService,
+    public soundPlayerService: SoundPlayerService,
+    public commonService: CommonService
+    ) {
+      this.player.score = 0;
+  }
+
+  calcRoundScore() {
+    let secondsToAnswer = this.roundTimerStart - this.roundTimer;
+    let scoreForRound = 50 * (20 - secondsToAnswer) + 1000;
+    this.player.score += scoreForRound;
   }
 
   public async nextRound() {
-
     clearInterval(this.interval);
     await this.commonService.delay(2500);
     this.currentQuestion < (this.maxQuestions - 1) ? this.currentQuestion += 1: this.endGame();
