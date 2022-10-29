@@ -30,17 +30,13 @@ export class QuestionAskerComponent implements OnInit {
     this.gameService.answersDisabled = true;
     if(answer.isCorrect) {
       this.soundPlayerService.playAudio('correct')
-      // var roundScore = this.evaluateCorrectAnswer()
-      this.gameService.incrementScore(1)
+      this.gameService.calcRoundScore()
     }
     else {
       this.soundPlayerService.playAudio('incorrect')
     }
-    // await this.commonService.delay(2500);
     this.gameService.nextRound();
-    // this.answersDisabled = false;
+
   }
-  // evaluateCorrectAnswer() {
-  //   throw new Error('Method not implemented.');
-  // }
+
 }
