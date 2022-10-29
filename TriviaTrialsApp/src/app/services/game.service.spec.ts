@@ -62,4 +62,13 @@ describe('GameService', () => {
     expect(service.startRound).toHaveBeenCalled();
   });
 
+  it('should calculate score for round based on timer', async () => {
+    service.roundTimer = 15;
+    service.player.score = 0;
+
+    service.calcRoundScore();
+
+    // Calculation = 50 * (20 - secondsToAnswer) + 1000;
+    expect(service.player.score).toBe(1750);
+  });
 });
