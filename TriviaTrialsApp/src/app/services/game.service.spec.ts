@@ -62,7 +62,7 @@ describe('GameService', () => {
     expect(service.startRound).toHaveBeenCalled();
   });
 
-  it('should calculate score for round based on timer', async () => {
+  it('should calculate score for round based on timer', () => {
     service.roundTimer = 15;
     service.player.score = 0;
 
@@ -70,5 +70,36 @@ describe('GameService', () => {
 
     // Calculation = 50 * (20 - secondsToAnswer) + 1000;
     expect(service.player.score).toBe(1750);
+  });
+
+  it('should calculate score for round based on timer', () => {
+    service.roundTimer = 15;
+    service.player.score = 0;
+
+    service.calcRoundScore();
+
+    // Calculation = 50 * (20 - secondsToAnswer) + 1000;
+    expect(service.player.score).toBe(1750);
+  });
+
+  it('should decrement time in checkTime()', ()  => {
+    spyOn(service, "nextRound").and.stub();
+
+    // service.gameOn = true;;
+    // service.player.score = 0;
+    service.roundTimer = 5;
+    service.checkTime();
+
+    expect(service.roundTimer).toBe(4);
+
+  });
+
+  it('should end game', ()  => {
+    service.roundTimer = 5;
+    service.endGame();
+
+    expect(service.gameOver).toBe(true);
+    expect(service.gameOn).toBe(false);
+
   });
 });
