@@ -13,4 +13,14 @@ describe('SoundPlayerService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should play audio', ()  => {
+    let mockAudio = new Audio();
+    mockAudio.play = jasmine.createSpy()
+
+    spyOn(window, 'Audio').and.returnValue(mockAudio);
+    service.playAudio('correct');
+
+    expect(mockAudio.play).toHaveBeenCalled();
+  });
 });
