@@ -125,6 +125,9 @@ Resources:
       StageName: TriviaTrialsSaveScoreApiGateway
 
   lambdaApiGatewayInvoke:
+    DependsOn:
+      - SaveScoreFunction
+      - apiGatewayDeployment
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
