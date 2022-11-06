@@ -78,7 +78,7 @@ Resources:
       FunctionName: SaveScore
       Handler: save_score.handler
       Role: !GetAtt LambdaRole.Arn
-      MemorySize: 64
+      MemorySize: 128
       Runtime: python3.9
 
 
@@ -125,6 +125,9 @@ Resources:
       StageName: TriviaTrialsSaveScoreApiGateway
 
   lambdaApiGatewayInvoke:
+    DependsOn:
+      - SaveScoreFunction
+      - apiGatewayDeployment
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
@@ -136,7 +139,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: /aws/lambda/SaveScore
-      RetentionInDays: 40
+      RetentionInDays: 60
 
 Outputs:
   apiGatewayInvokeURL:
