@@ -132,7 +132,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: StartGame
       Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:us-east-1:049850382269:47sdbk9dd7/*
+      SourceArn: arn:aws:execute-api:us-east-1:049850382269:6udxzjb1e2/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
