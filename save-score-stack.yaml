@@ -78,7 +78,7 @@ Resources:
       FunctionName: SaveScore
       Handler: save_score.handler
       Role: !GetAtt LambdaRole.Arn
-      MemorySize: 64
+      MemorySize: 128
       Runtime: python3.9
 
 
