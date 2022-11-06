@@ -1,11 +1,11 @@
-name: Build and Deploy StartGame Python Lambda to S3 2
+name: Build and Deploy SaveScore Python Lambda to S3 2
 
 # Controls when the action will run. Triggers the workflow on push
 # events but only for the main branch
 on:
   push:
     paths: 
-      - lambdas/start_game/**
+      - lambdas/save_score/**
     branches:
       - main
 
@@ -30,22 +30,22 @@ jobs:
 
     - name: Install dependencies with LambCI
       run: |
-        cd lambdas/start_game/
+        cd lambdas/save_score/
         pip install -r requirements.txt -t .
 
     - name: Run Unit Tests
       run: |
-        cd lambdas/start_game/
+        cd lambdas/save_score/
 
     - name: Bundle function with dependencies
       run: |
-        cd lambdas/start_game/
+        cd lambdas/save_score/
         zip -r build.zip .
 
     - name: Copy function zip file to S3
       run: |
-          aws s3 cp lambdas/start_game/build.zip s3://trivia-trials-config-bucket/start_game/start_game.zip
+          aws s3 cp lambdas/save_score/build.zip s3://trivia-trials-config-bucket/save_score/save_score.zip
 
     - name: Update function from S3
       run: |
-          aws lambda update-function-code --function-name StartGame --s3-bucket trivia-trials-config-bucket --s3-key start_game/start_game.zip
+          aws lambda update-function-code --function-name SaveScore --s3-bucket trivia-trials-config-bucket --s3-key save_score/save_score.zip

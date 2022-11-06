@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Trivia Trials Dynamo, API Gateway and Lambda functions
+Description: Trivia Trials Dynamo, API Gateway and Lambda function for saving score
 
 # Parameters:
 #   apiGatewayName:
@@ -23,20 +23,21 @@ Resources:
     Properties:
       AttributeDefinitions:
         - 
-          AttributeName: "QuestionId"
+          AttributeName: "GameScoreId"
           AttributeType: "S"
       KeySchema:
         - 
-          AttributeName: "QuestionId"
+          AttributeName: "GameScoreId"
           KeyType: "HASH"
       ProvisionedThroughput:
         ReadCapacityUnits: 3
         WriteCapacityUnits: 3
-      TableName: Questions
+      TableName: GameScores
 
-  DynamodbRole:
+  LambdaRole:
       Type: "AWS::IAM::Role"
       Properties:
+        RoleName: "SaveScoreLambdaRole"
         ManagedPolicyArns: 
           - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
         AssumeRolePolicyDocument: 
@@ -67,28 +68,28 @@ Resources:
                   Resource: 
                     - !GetAtt DynamoDB.Arn
 
-  StartGameFunction:
+  SaveScoreFunction:
     Type: "AWS::Lambda::Function"
     Properties:
       Code: 
         ImageUri: public.ecr.aws/lambda/python:3.9
         S3Bucket: trivia-trials-config-bucket
-        S3Key: start_game/start_game.zip
-      FunctionName: StartGame
-      Handler: start_game.handler
-      Role: !GetAtt DynamodbRole.Arn
-      MemorySize: 128
+        S3Key: save_score/save_score.zip
+      FunctionName: SaveScore
+      Handler: save_score.handler
+      Role: !GetAtt LambdaRole.Arn
+      MemorySize: 64
       Runtime: python3.9
 
 
   apiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Description: Example API Gateway
+      Description: API Gateway for saving scores
       EndpointConfiguration:
         Types:
           - EDGE
-      Name: TriviaTrialsApiGateway
+      Name: TriviaTrialsSaveScoreApiGateway
 
   apiGatewayRootMethod:
     Type: AWS::ApiGateway::Method
@@ -98,7 +99,7 @@ Resources:
       Integration:
         IntegrationHttpMethod: POST
         Type: AWS_PROXY
-        Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${StartGameFunction.Arn}/invocations
+        Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${SaveScoreFunction.Arn}/invocations
       ResourceId: !GetAtt apiGateway.RootResourceId
       RestApiId: !Ref apiGateway
 
@@ -111,7 +112,7 @@ Resources:
         Integration:
           IntegrationHttpMethod: POST
           Type: AWS_PROXY
-          Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${StartGameFunction.Arn}/invocations
+          Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${SaveScoreFunction.Arn}/invocations
         ResourceId: !GetAtt apiGateway.RootResourceId
         RestApiId: !Ref apiGateway
 
@@ -121,25 +122,25 @@ Resources:
       - apiGatewayRootMethod
     Properties:
       RestApiId: !Ref apiGateway
-      StageName: TriviaTrialsApiGateway
+      StageName: TriviaTrialsSaveScoreApiGateway
 
   lambdaApiGatewayInvoke:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
-      FunctionName: StartGame
+      FunctionName: SaveScore
       Principal: apigateway.amazonaws.com
       SourceArn: arn:aws:execute-api:us-east-1:049850382269:47sdbk9dd7/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: /aws/lambda/StartGame
-      RetentionInDays: 90
+      LogGroupName: /aws/lambda/SaveScore
+      RetentionInDays: 40
 
 Outputs:
   apiGatewayInvokeURL:
-    Value: !Sub https://${apiGateway}.execute-api.us-east-1.amazonaws.com/TriviaTrialsApiGateway
+    Value: !Sub https://${apiGateway}.execute-api.us-east-1.amazonaws.com/TriviaTrialsSaveScoreApiGateway
 
   lambdaArn:
-    Value: !GetAtt StartGameFunction.Arn
+    Value: !GetAtt SaveScoreFunction.Arn
