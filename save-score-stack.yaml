@@ -139,7 +139,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: /aws/lambda/SaveScore
-      RetentionInDays: 40
+      RetentionInDays: 60
 
 Outputs:
   apiGatewayInvokeURL:
