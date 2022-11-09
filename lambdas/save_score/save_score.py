@@ -1,7 +1,7 @@
 import json
 import requests
 import boto3
-from dynamo_util import get_random_questions
+from dynamo_util import save_score
 import logging
 
 logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 def handler(event, context):
 
     try:
-        questions = get_random_questions(10)
+        logger.info(f"event {str(event)}")
+        questions = save_score("s900", 900)
 
         logger.info('returning following questions: ' + str(questions))
 
