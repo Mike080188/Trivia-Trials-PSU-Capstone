@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 def handler(event, context):
 
     try:
-        logger.info(f"event {str(event)}")
+        print(f"event {str(event)}")
         questions = save_score("s900", 900)
 
         logger.info('returning following questions: ' + str(questions))
