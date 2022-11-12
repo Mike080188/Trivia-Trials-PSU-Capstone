@@ -1,7 +1,7 @@
 import sys
 import boto3
 sys.path.insert(0,'..')
-import dynamo_util
+from start_game import dynamo_util
 
 from moto import mock_dynamodb
 

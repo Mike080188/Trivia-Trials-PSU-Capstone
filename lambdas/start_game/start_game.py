@@ -1,7 +1,7 @@
 import json
 import requests
 import boto3
-from dynamo_util import get_random_questions
+from start_game.dynamo_util import get_random_questions
 import logging
 
 logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
