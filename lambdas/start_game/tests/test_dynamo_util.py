@@ -1,7 +1,10 @@
-import sys
+import sys, os
 import boto3
-sys.path.insert(0,'..')
-from start_game import dynamo_util
+
+file_path = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, file_path + '/../')
+
+import dynamo_util
 
 from moto import mock_dynamodb
 

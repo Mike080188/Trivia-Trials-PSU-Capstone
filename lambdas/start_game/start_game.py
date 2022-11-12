@@ -1,12 +1,10 @@
 import json
-import requests
-import boto3
-from start_game.dynamo_util import get_random_questions
+from dynamo_util import get_random_questions
 import logging
 
 logging.basicConfig(format='%(asctime)s %(message)s')
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 def handler(event, context):
 
