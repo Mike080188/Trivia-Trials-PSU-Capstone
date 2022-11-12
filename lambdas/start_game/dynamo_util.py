@@ -4,7 +4,8 @@ import boto3
 from boto3.dynamodb.conditions import Key
 import logging
 
-logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(message)s')
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 MAX_QUESTION_ID = 15

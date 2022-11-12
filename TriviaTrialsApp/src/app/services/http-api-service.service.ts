@@ -27,6 +27,7 @@ export class HttpApiServiceService {
 
   saveScore(name: string, score: number): Observable<any> {
     const headerDict = {
+      'Content-Type': 'application/json',
       'name': name,
       'score': score.toString()
     }
