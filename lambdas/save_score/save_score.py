@@ -4,7 +4,8 @@ import boto3
 from dynamo_util import save_score
 import logging
 
-logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(message)s')
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 def handler(event, context):
