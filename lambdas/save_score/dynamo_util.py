@@ -8,13 +8,73 @@ import logging
 logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+dynamodb = boto3.resource('dynamodb')
+scoress_table = dynamodb.Table('GameScores')
+table_size = None
+
 def save_score(name: str, score: int):
     """Creates a random hash key and saves player's name and score to GameScores table"""
-    dynamodb = boto3.resource('dynamodb')
-    scoress_table = dynamodb.Table('GameScores')
+    min_score_obj = get_min_score()
+    min_score = int(min_score_obj['score'])
 
-    new_id = str(uuid.uuid4())
-    item_to_put = {"GameScoreId": new_id, "score": score, "name": name}
-    logger.info(f"putting item: {item_to_put}")
-    response = scoress_table.put_item(Item=item_to_put)
-    logger.info(f"Done putting item, response: {str(response)}")
+    is_high_score = score >= min_score
+    if is_high_score or table_size < 25:
+        if table_size < 25:
+            # Simply add the new item
+            add_new_score(name, score)
+        elif is_high_score:
+            # Update/replace the min score with this score
+            min_score_key = min_score_obj['GameScoreId']
+            update_score(min_score_key, name, score)
+
+    else:
+        logger.info(f"Score {score} did not make the leaderboard, not saving")
+
+def get_min_score():
+    """Gets the lowest score from the GameScores table"""
+
+    results = scoress_table.scan()
+    scores = results['Items']
+    global table_size
+    table_size = len(scores)
+    sorted_scores = sorted(scores, key=lambda d: int(d['score'])) 
+    # return int(sorted_scores[0]['score'])
+    return sorted_scores[0]
+
+
+def update_score(key, name, score):
+
+    UpdateExpression = 'SET #nm = :name, score = :score'
+    ExpressionAttributeValues = {
+            ':name': name,
+            ':score': score
+    }
+    ExpressionAttributeNames={
+        "#nm": "name"
+    }
+    update = scoress_table.update_item(
+        Key={
+            'GameScoreId': key
+        },
+        # ConditionExpression= 'attribute_exists(employee_id)',
+        UpdateExpression=UpdateExpression,
+        ExpressionAttributeValues=ExpressionAttributeValues,
+        ExpressionAttributeNames=ExpressionAttributeNames
+    )
+
+def add_new_score(name, score):
+        new_id = str(uuid.uuid4())
+        item_to_put = {"GameScoreId": new_id, "score": score, "name": name}
+        logger.info(f"putting item: {item_to_put}")
+        response = scoress_table.put_item(Item=item_to_put)
+        logger.info(f"Done putting item, response: {str(response)}")
+
+
+save_score('yyyyyyyyy', 556)
+
+# def get_table_size():
+#     return table_size or 
+
+# min = get_min_score()
+# v = 9
+
