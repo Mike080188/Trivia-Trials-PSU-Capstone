@@ -5,7 +5,8 @@ from boto3.dynamodb.conditions import Key
 import uuid
 import logging
 
-logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s %(message)s')
+logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 dynamodb = boto3.resource('dynamodb')
@@ -38,9 +39,7 @@ def get_min_score():
     global table_size
     table_size = len(scores)
     sorted_scores = sorted(scores, key=lambda d: int(d['score'])) 
-    # return int(sorted_scores[0]['score'])
     return sorted_scores[0]
-
 
 def update_score(key, name, score):
 
@@ -56,7 +55,6 @@ def update_score(key, name, score):
         Key={
             'GameScoreId': key
         },
-        # ConditionExpression= 'attribute_exists(employee_id)',
         UpdateExpression=UpdateExpression,
         ExpressionAttributeValues=ExpressionAttributeValues,
         ExpressionAttributeNames=ExpressionAttributeNames
@@ -68,13 +66,3 @@ def add_new_score(name, score):
         logger.info(f"putting item: {item_to_put}")
         response = scoress_table.put_item(Item=item_to_put)
         logger.info(f"Done putting item, response: {str(response)}")
-
-
-save_score('yyyyyyyyy', 556)
-
-# def get_table_size():
-#     return table_size or 
-
-# min = get_min_score()
-# v = 9
-
