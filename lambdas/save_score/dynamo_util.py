@@ -16,8 +16,8 @@ def save_score(name: str, score: int):
     new_id = str(uuid.uuid4())
     item_to_put = {"GameScoreId": new_id, "score": score, "name": name}
     logger.info(f"putting item: {item_to_put}")
-    scoress_table.put_item(Item=item_to_put)
-    logger.info("done")
+    response = scoress_table.put_item(Item=item_to_put)
+    logger.info(f"Done puttin item, response: {str(response)}")
 
 
 

@@ -8,16 +8,18 @@ logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 def handler(event, context):
-
+    logger.info(f"event {str(event)}")
     try:
-        print(f"event {str(event)}")
-        questions = save_score("s900", 900)
+        name = event['headers']['Name']
+        score = event['headers']['Score']
 
-        logger.info('returning following questions: ' + str(questions))
+        save_score(name, score)
+
+        logger.info('Score saved')
 
         return {
             "statusCode": 200,
-            "body": json.dumps(questions),
+            "body": json.dumps("Score saved successfully"),
             'headers': {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'

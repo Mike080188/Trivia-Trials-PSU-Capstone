@@ -82,6 +82,8 @@ export class GameService {
   }
 
   public endGame() {
+    console.log("saving score")
+    this.apiHttpService.saveScore(this.player.name, this.player.score)
     console.log("game over")
     this.gameOver = true;
     this.gameOn = false;

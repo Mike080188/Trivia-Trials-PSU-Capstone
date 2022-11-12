@@ -8,7 +8,8 @@ import { Question } from '../model/question';
 })
 export class HttpApiServiceService {
 
-  apiURL = 'https://6udxzjb1e2.execute-api.us-east-1.amazonaws.com/TriviaTrialsApiGateway/'; // TODO use constant from config
+  getQuestionsUrl = 'https://6udxzjb1e2.execute-api.us-east-1.amazonaws.com/TriviaTrialsApiGateway/'; // TODO use constant from config
+  saveScorUrl = 'https://6eje8pht04.execute-api.us-east-1.amazonaws.com/TriviaTrialsSaveScoreApiGateway/';
 
   constructor(private http: HttpClient) {}
 
@@ -19,9 +20,26 @@ export class HttpApiServiceService {
   };
   getQuestions(): Observable<Question[]> {
     return this.http
-      .get<Question[]>(this.apiURL)
+      .get<Question[]>(this.getQuestionsUrl)
       .pipe(retry(1), catchError(this.handleError));
   }
+
+
+  saveScore(name: string, score: number): Observable<any> {
+    const headerDict = {
+      'name': name,
+      'score': score.toString()
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    return this.http
+      .get(this.saveScorUrl, requestOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+
 
   // Error handling
   handleError(error: any) {
