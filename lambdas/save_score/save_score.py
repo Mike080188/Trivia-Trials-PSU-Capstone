@@ -12,7 +12,7 @@ def handler(event, context):
     logger.info(f"event {str(event)}")
     try:
         name = event['headers']['Name']
-        score = event['headers']['Score']
+        score = int(event['headers']['Score'])
 
         save_score(name, score)
 
