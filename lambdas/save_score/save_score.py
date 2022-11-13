@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 def handler(event, context):
     logger.info(f"event {str(event)}")
     try:
-        name = event['headers']['Name']
-        score = int(event['headers']['Score'])
+        name = event['headers']['name']
+        score = int(event['headers']['score'])
 
         save_score(name, score)
 
