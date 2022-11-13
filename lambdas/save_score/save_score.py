@@ -14,6 +14,8 @@ def handler(event, context):
         name = event['headers']['name']
         score = int(event['headers']['score'])
 
+        logger.info(f'Saving score ({name}: {score})')
+
         save_score(name, score)
 
         logger.info('Score saved')
