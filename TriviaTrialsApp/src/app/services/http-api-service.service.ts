@@ -24,7 +24,6 @@ export class HttpApiServiceService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-
   saveScore(name: string, score: number): Observable<any> {
     const headerDict = {
       'Content-Type': 'application/json',
@@ -39,8 +38,6 @@ export class HttpApiServiceService {
       .get(this.saveScorUrl, requestOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-
-
 
   // Error handling
   handleError(error: any) {

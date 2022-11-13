@@ -18,7 +18,7 @@ export class GameService {
 
   questions: Question[] = [new Question];
   currentQuestion: number = 0;
-  maxQuestions: number = 10;
+  maxQuestions: number = 3;
   gameOn: boolean = false;
   round: number = 1;
   roundTimer: number = 20;
@@ -27,10 +27,7 @@ export class GameService {
   interval: any;
   answersDisabled: boolean = false;
   gameOver: boolean = false;
-
-
   player: Player = new Player();
-
 
   constructor(
     private apiHttpService: HttpApiServiceService,
@@ -83,7 +80,11 @@ export class GameService {
 
   public endGame() {
     console.log("saving score")
-    this.apiHttpService.saveScore(this.player.name, this.player.score)
+    // this.apiHttpService.saveScore(this.player.name, this.player.score)
+    this.apiHttpService.saveScore(this.player.name, this.player.score).subscribe((res) => {
+      console.log("Response: " + res)
+    });
+
     console.log("game over")
     this.gameOver = true;
     this.gameOn = false;
