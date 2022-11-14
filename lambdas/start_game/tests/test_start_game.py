@@ -1,7 +1,10 @@
 from mock import patch
 import pytest
-import sys
-sys.path.insert(0,'..')
+import sys, os
+
+file_path = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, file_path + '/../')
+
 import start_game
 
 @patch("start_game.get_random_questions", return_value=['q1', 'q2'])

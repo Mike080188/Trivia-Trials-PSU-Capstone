@@ -59,6 +59,7 @@ Resources:
                   Action:
                     - dynamodb:PutItem
                     - dynamodb:GetItem
+                    - dynamodb:UpdateItem
                     - dynamodb:Query
                     - dynamodb:Scan
                     - dynamodb:PutItem
@@ -133,7 +134,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: SaveScore
       Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:us-east-1:049850382269:47sdbk9dd7/*
+      SourceArn: arn:aws:execute-api:us-east-1:049850382269:6eje8pht04/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
