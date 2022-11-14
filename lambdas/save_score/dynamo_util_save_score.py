@@ -10,7 +10,7 @@ logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
 
 dynamodb = boto3.resource('dynamodb')
-scoress_table = dynamodb.Table('GameScores')
+scores_table = dynamodb.Table('GameScores')
 table_size = None
 
 def save_score(name: str, score: int):
@@ -32,9 +32,9 @@ def save_score(name: str, score: int):
         logger.info(f"Score {score} did not make the leaderboard, not saving")
 
 def get_min_score():
-    """Gets the lowest score from the GameScores table"""
+    """Gets the lowest score obj from the GameScores table"""
 
-    results = scoress_table.scan()
+    results = scores_table.scan()
     scores = results['Items']
     global table_size
     table_size = len(scores)
@@ -51,7 +51,7 @@ def update_score(key, name, score):
     ExpressionAttributeNames={
         "#nm": "name"
     }
-    update = scoress_table.update_item(
+    update = scores_table.update_item(
         Key={
             'GameScoreId': key
         },
@@ -64,5 +64,5 @@ def add_new_score(name, score):
         new_id = str(uuid.uuid4())
         item_to_put = {"GameScoreId": new_id, "score": score, "name": name}
         logger.info(f"putting item: {item_to_put}")
-        response = scoress_table.put_item(Item=item_to_put)
+        response = scores_table.put_item(Item=item_to_put)
         logger.info(f"Done putting item, response: {str(response)}")

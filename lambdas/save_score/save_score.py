@@ -1,7 +1,7 @@
 import json
 import requests
 import boto3
-from dynamo_util import save_score
+from dynamo_util_save_score import save_score
 import logging
 
 logging.basicConfig(format='%(asctime)s %(message)s')
