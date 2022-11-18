@@ -1,43 +1,27 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: Trivia Trials Dynamo, API Gateway and Lambda function for saving score
-
-# Parameters:
-#   apiGatewayName:
-#     Type: String
-#     Default: my-api
-#   apiGatewayStageName:
-#     Type: String
-#     AllowedPattern: "[a-z0-9]+"
-#     Default: call
-#   apiGatewayHTTPMethod:
-#     Type: String
-#     Default: POST
-#   lambdaFunctionName:
-#     Type: String
-#     AllowedPattern: "[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+"
-#     Default: my-function
+Description: Trivia Trials Dynamo, API Gateway and Lambda function for getting leaderboard
 
 Resources:
-  DynamoDB:
-    Type: "AWS::DynamoDB::Table"
-    Properties:
-      AttributeDefinitions:
-        - 
-          AttributeName: "GameScoreId"
-          AttributeType: "S"
-      KeySchema:
-        - 
-          AttributeName: "GameScoreId"
-          KeyType: "HASH"
-      ProvisionedThroughput:
-        ReadCapacityUnits: 3
-        WriteCapacityUnits: 3
-      TableName: GameScores
+  # DynamoDB:
+  #   Type: "AWS::DynamoDB::Table"
+  #   Properties:
+  #     AttributeDefinitions:
+  #       - 
+  #         AttributeName: "GameScoreId"
+  #         AttributeType: "S"
+  #     KeySchema:
+  #       - 
+  #         AttributeName: "GameScoreId"
+  #         KeyType: "HASH"
+  #     ProvisionedThroughput:
+  #       ReadCapacityUnits: 3
+  #       WriteCapacityUnits: 3
+  #     TableName: GameScores
 
   LambdaRole:
       Type: "AWS::IAM::Role"
       Properties:
-        RoleName: "SaveScoreLambdaRole"
+        RoleName: "GetLeaderboardLambdaRole"
         ManagedPolicyArns: 
           - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
         AssumeRolePolicyDocument: 
@@ -57,25 +41,23 @@ Resources:
                 - 
                   Effect: Allow
                   Action:
-                    - dynamodb:PutItem
                     - dynamodb:GetItem
                     - dynamodb:Query
                     - dynamodb:Scan
-                    - dynamodb:PutItem
                     - logs:CreateLogGroup
                     - logs:CreateLogStream
                     - logs:PutLogEvents
                   Resource: 
-                    - !GetAtt DynamoDB.Arn
+                    - arn:aws:dynamodb:us-east-1:${AWS::AccountId}:table/GameScores
 
-  SaveScoreFunction:
+  GetLeaderboardFunction:
     Type: "AWS::Lambda::Function"
     Properties:
       Code: 
         ImageUri: public.ecr.aws/lambda/python:3.9
         S3Bucket: trivia-trials-config-bucket
         S3Key: save_score/save_score.zip
-      FunctionName: SaveScore
+      FunctionName: GetLeaderboard
       Handler: save_score.handler
       Role: !GetAtt LambdaRole.Arn
       MemorySize: 128
@@ -85,11 +67,11 @@ Resources:
   apiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Description: API Gateway for saving scores
+      Description: API Gateway for getting leaderboard from GameScores
       EndpointConfiguration:
         Types:
           - EDGE
-      Name: TriviaTrialsSaveScoreApiGateway
+      Name: TriviaTrialsGetLeaderboardGateway
 
   apiGatewayRootMethod:
     Type: AWS::ApiGateway::Method
@@ -99,22 +81,9 @@ Resources:
       Integration:
         IntegrationHttpMethod: POST
         Type: AWS_PROXY
-        Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${SaveScoreFunction.Arn}/invocations
+        Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${GetLeaderboardFunction.Arn}/invocations
       ResourceId: !GetAtt apiGateway.RootResourceId
       RestApiId: !Ref apiGateway
-
-
-  TestApiMethod:
-      Type: "AWS::ApiGateway::Method"
-      Properties:
-        AuthorizationType: NONE
-        HttpMethod: POST
-        Integration:
-          IntegrationHttpMethod: POST
-          Type: AWS_PROXY
-          Uri: !Sub arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/${SaveScoreFunction.Arn}/invocations
-        ResourceId: !GetAtt apiGateway.RootResourceId
-        RestApiId: !Ref apiGateway
 
   apiGatewayDeployment:
     Type: AWS::ApiGateway::Deployment
@@ -122,28 +91,28 @@ Resources:
       - apiGatewayRootMethod
     Properties:
       RestApiId: !Ref apiGateway
-      StageName: TriviaTrialsSaveScoreApiGateway
+      StageName: TriviaTrialsGetLeaderboardGateway
 
   lambdaApiGatewayInvoke:
     DependsOn:
-      - SaveScoreFunction
+      - GetLeaderboardFunction
       - apiGatewayDeployment
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
-      FunctionName: SaveScore
+      FunctionName: GetLeaderboard
       Principal: apigateway.amazonaws.com
       SourceArn: arn:aws:execute-api:us-east-1:${AWS::AccountId}:6eje8pht04/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: /aws/lambda/SaveScore
+      LogGroupName: /aws/lambda/GetLeaderboard
       RetentionInDays: 60
 
 Outputs:
   apiGatewayInvokeURL:
-    Value: !Sub https://${apiGateway}.execute-api.us-east-1.amazonaws.com/TriviaTrialsSaveScoreApiGateway
+    Value: !Sub https://${apiGateway}.execute-api.us-east-1.amazonaws.com/TriviaTrialsGetLeaderboardGateway
 
   lambdaArn:
-    Value: !GetAtt SaveScoreFunction.Arn
+    Value: !GetAtt GetLeaderboardFunction.Arn
