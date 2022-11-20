@@ -2,22 +2,6 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Trivia Trials Dynamo, API Gateway and Lambda function for getting leaderboard
 
 Resources:
-  # DynamoDB:
-  #   Type: "AWS::DynamoDB::Table"
-  #   Properties:
-  #     AttributeDefinitions:
-  #       - 
-  #         AttributeName: "GameScoreId"
-  #         AttributeType: "S"
-  #     KeySchema:
-  #       - 
-  #         AttributeName: "GameScoreId"
-  #         KeyType: "HASH"
-  #     ProvisionedThroughput:
-  #       ReadCapacityUnits: 3
-  #       WriteCapacityUnits: 3
-  #     TableName: GameScores
-
   LambdaRole:
       Type: "AWS::IAM::Role"
       Properties:
@@ -56,9 +40,10 @@ Resources:
       Code: 
         ImageUri: public.ecr.aws/lambda/python:3.9
         S3Bucket: trivia-trials-config-bucket
-        S3Key: save_score/save_score.zip
+        S3Key: get_leaderboard/get_leaderboard.zip
       FunctionName: GetLeaderboard
-      Handler: save_score.handler
+      Handler: get_leaderboard.handler
+
       Role: !GetAtt LambdaRole.Arn
       MemorySize: 128
       Runtime: python3.9

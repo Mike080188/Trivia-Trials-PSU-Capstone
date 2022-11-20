@@ -1,11 +1,11 @@
-name: Build and Deploy SaveScore Python Lambda to S3 2
+name: Build and Deploy GetLeaderboard Python Lambda to S3
 
 # Controls when the action will run. Triggers the workflow on push
 # events but only for the main branch
 on:
   push:
     paths: 
-      - lambdas/save_score/**
+      - lambdas/get_leaderboard/**
     branches:
       - main
 
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  build-and-deploy-start-game-lambda-to-s3:
+  build-and-deploy-get-leaderboard-lambda-to-s3:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -30,24 +30,24 @@ jobs:
 
     - name: Install dependencies with LambCI
       run: |
-        cd lambdas/save_score/
+        cd lambdas/get_leaderboard/
         pip install -r requirements.txt -t .
 
     - name: Run Unit Tests
       run: |
-        cd lambdas/save_score/
-        python -m pytest --cov-report term --cov=.  tests_save_score/
+        cd lambdas/get_leaderboard/
+        python -m pytest --cov-report term --cov=.  tests/
 
 
     - name: Bundle function with dependencies
       run: |
-        cd lambdas/save_score/
+        cd lambdas/get_leaderboard/
         zip -r build.zip .
 
     - name: Copy function zip file to S3
       run: |
-          aws s3 cp lambdas/save_score/build.zip s3://trivia-trials-config-bucket/save_score/save_score.zip
+          aws s3 cp lambdas/get_leaderboard/build.zip s3://trivia-trials-config-bucket/get_leaderboard/get_leaderboard.zip
 
     - name: Update function from S3
       run: |
-          aws lambda update-function-code --function-name SaveScore --s3-bucket trivia-trials-config-bucket --s3-key save_score/save_score.zip
+          aws lambda update-function-code --function-name GetLeaderboard --s3-bucket trivia-trials-config-bucket --s3-key get_leaderboard/get_leaderboard.zip
