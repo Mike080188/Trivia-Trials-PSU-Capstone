@@ -134,7 +134,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: SaveScore
       Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:us-east-1:049850382269:6eje8pht04/*
+      SourceArn: !Sub arn:aws:execute-api:us-east-1:${AWS::AccountId}:6eje8pht04/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup
