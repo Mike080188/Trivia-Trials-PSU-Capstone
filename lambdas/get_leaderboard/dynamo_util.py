@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 def get_leaderboard():
     """Get the leaderboard from GameScores table"""
-    pass
+    return [{"name": "Steve", "score": "340"},{"name": "Bob", "score": "500"}]
     # dynamodb = boto3.resource('dynamodb')
     # scoress_table = dynamodb.Table('GameScores')
 
