@@ -16,6 +16,10 @@ def get_leaderboard():
     results = scores_table.scan()
     scores = results['Items']
 
+    for score in scores:
+        score['score'] = int(score['score'])
+
     sorted_scores = sorted(scores, key=lambda d: int(d['score']), reverse=True) 
     return sorted_scores
+
 
