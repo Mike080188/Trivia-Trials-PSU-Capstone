@@ -43,6 +43,7 @@ Resources:
         S3Key: get_leaderboard/get_leaderboard.zip
       FunctionName: GetLeaderboard
       Handler: get_leaderboard.handler
+
       Role: !GetAtt LambdaRole.Arn
       MemorySize: 128
       Runtime: python3.9
