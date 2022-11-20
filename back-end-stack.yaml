@@ -71,7 +71,6 @@ Resources:
     Type: "AWS::Lambda::Function"
     Properties:
       Code: 
-        # ImageUri: public.ecr.aws/lambda/python:3.9
         S3Bucket: trivia-trials-config-bucket
         S3Key: start_game/start_game.zip
       FunctionName: StartGame
