@@ -9,37 +9,17 @@ logging.basicConfig(format='%(asctime)s %(message)s',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 def get_leaderboard():
-    """Get the leaderboard from GameScores table"""
-    pass
-    # dynamodb = boto3.resource('dynamodb')
-    # scoress_table = dynamodb.Table('GameScores')
+    """Get the leaderboard from GameScores table return sorted descending"""
+    dynamodb = boto3.resource('dynamodb')
+    scores_table = dynamodb.Table('GameScores')
 
-    # questions = []
-    # counted_ids = []
+    results = scores_table.scan()
+    scores = results['Items']
 
-    # logger.info('Getting ' + str(num_questions) + ' random questions')
+    for score in scores:
+        score['score'] = int(score['score'])
 
-    # # Loop until desired number of unique questions
-    # while len(counted_ids) < num_questions:
-    #     rand = random.randint(1,MAX_QUESTION_ID)
-    #     # Don't want duplicates
-    #     if(rand in counted_ids):
-    #         continue
-    #     counted_ids.append(rand)
+    sorted_scores = sorted(scores, key=lambda d: int(d['score']), reverse=True) 
+    return sorted_scores
 
-    #     # Get Question based on random id
-    #     resp = questions_table.query(KeyConditionExpression=Key('QuestionId').eq(str(rand)))
-    #     logger.info('response from Dynamo: ' + str(resp))
-    #     question = resp['Items'][0]
-
-    #     questions.append(question)
-
-    # return questions
-
-
-    # new_id = str(uuid.uuid4())
-    # item_to_put = {"GameScoreId": new_id, "score": score, "name": name}
-    # logger.info(f"putting item: {item_to_put}")
-    # scoress_table.put_item(Item=item_to_put)
-    # logger.info("done")
 

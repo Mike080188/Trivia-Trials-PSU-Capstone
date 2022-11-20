@@ -19,10 +19,7 @@ def test_handler(save_score_patch):
 @patch("get_leaderboard.logger.error")
 @patch("get_leaderboard.get_leaderboard", side_effect=Exception('Dynamo Error'))
 def test_handler_error(get_leaderboard_patch, logger_error_patch):
-    # event = {}
-    # event['headers'] = {}
-    # event['headers']['name'] = "Steve"
-    # event['headers']['score'] = "500"
+
     response = get_leaderboard.handler('event', 'context')
 
     get_leaderboard_patch.assert_called()
