@@ -28,6 +28,8 @@ def test_handler_error(save_score_patch, logger_error_patch):
     event['headers']['score'] = "500"
     response = save_score.handler(event, 'context')
 
+    save_score_patch.assert_called()
+
     # Assert error logged
     logger_error_patch.assert_called()
 
