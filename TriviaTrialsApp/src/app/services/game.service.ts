@@ -6,6 +6,7 @@ import { HttpApiServiceService } from './http-api-service.service';
 import { Observable } from 'rxjs';
 import { SoundPlayerService } from './sound-player.service';
 import { Player } from 'app/model/player';
+import { GameScore } from 'app/model/game_score';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,11 @@ export class GameService {
   roundChangedSource: BehaviorSubject<number> = new BehaviorSubject(1);
 
   questions: Question[] = [new Question];
+  leaderboard: GameScore[] = [new GameScore];
   currentQuestion: number = 0;
   maxQuestions: number = 4;
   gameOn: boolean = false;
+  leaderboardLoaded: boolean = false;
   round: number = 1;
   roundTimer: number = 20;
   readonly roundTimerStart: number = 20;
@@ -28,6 +31,7 @@ export class GameService {
   answersDisabled: boolean = false;
   gameOver: boolean = false;
   player: Player = new Player();
+
 
   constructor(
     private apiHttpService: HttpApiServiceService,
@@ -82,12 +86,17 @@ export class GameService {
     console.log("saving score")
     // this.apiHttpService.saveScore(this.player.name, this.player.score)
     this.apiHttpService.saveScore(this.player.name, this.player.score).subscribe((res) => {
-      console.log("Response: " + res)
+      console.log("Save Score Response: " + res)
+      this.apiHttpService.getLeaderboard().subscribe((lb) => {
+        console.log("Get leaderboard Response: " + lb)
+        this.leaderboard = lb;
+        this.leaderboardLoaded = true;
+      });
     });
 
-    console.log("game over")
     this.gameOver = true;
     this.gameOn = false;
+    console.log("game over")
     clearInterval(this.interval);
   }
 

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { GameService } from './services/game.service';
 import { HttpApiServiceService } from './services/http-api-service.service';
-import { Question } from './model/question';
+// import { Question } from './model/question';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
 
   gameStarted = false;
   playerName = "";
-  public questions: Question[];
+  // public questions: Question[];
 
   ngOnInit() {
   }
@@ -28,5 +28,4 @@ export class AppComponent implements OnInit{
     this.gameService.player.name = this.playerName;
     this.gameService.loadQuestions();
   }
-
 }

@@ -1,0 +1,35 @@
+<div class="leaderboard-container">
+  <div class="leaderboard-header"> {{ getLeaderboardHeader() }} </div>
+  <table class="leaderboard-table" *ngIf="gameService.leaderboardLoaded">
+    <tr *ngFor="let score of gameService.leaderboard; let i = index" [attr.data-index]="i">
+      <td *ngIf="i % 2 == 0 " class="odd-row" [ngClass]="{'player-row': score.score == gameService.player.score && score.name == gameService.player.name}">
+        {{ i + 1 }}
+      </td>
+      <td *ngIf="i % 2 == 0 " class="odd-row" [ngClass]="{'player-row': score.score == gameService.player.score && score.name == gameService.player.name}">
+        {{ score.name }}
+      </td>
+      <td *ngIf="i % 2 == 0 " class="odd-row" [ngClass]="{'player-row': score.score == gameService.player.score && score.name == gameService.player.name}">
+        {{ score.score }}
+      </td>
+
+      <td *ngIf="i % 2 != 0 " class="even-row" [ngClass]="{'player-row': score.score == gameService.player.score && score.name == gameService.player.name}">
+        {{ i + 1 }}
+      </td>
+      <td *ngIf="i % 2 != 0 " class="even-row" [ngClass]="{'player-row': score.score == gameService.player.score && score.name == gameService.player.name}">
+        {{ score.name }}
+      </td>
+      <td *ngIf="i % 2 != 0 " class="even-row" [ngClass]="{'player-row': score.score == gameService.player.score && score.name == gameService.player.name}">
+        {{ score.score }}
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+  <!-- <span mat-list-item class="answer"
+    [ngClass]="{'red-background': !a.isCorrect, 'green-background': a.isCorrect}"
+    *ngFor="let a of gameService.questions[gameService.currentQuestion].answers"
+    [disabled]="this.gameService.answersDisabled || gameService.roundTimer == 0">
+    {{a.answer}}
+  </button>
+</mat-list> -->

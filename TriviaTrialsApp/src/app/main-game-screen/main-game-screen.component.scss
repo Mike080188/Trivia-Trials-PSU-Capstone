@@ -43,6 +43,23 @@ question-asker {
   // border-top: groove;
 }
 
+// leaderboard {
+//   bottom: 0;
+//   right: 0;
+//   height: 68%;
+//   position: absolute;
+//   width: 800px;
+//   right: 300px;
+// }
+
+leaderboard {
+  bottom: 35px;
+  height: auto;
+  position: absolute;
+  width: auto;
+  right: 500px;
+}
+
 timer {
   position: absolute;
   top: 50px;
