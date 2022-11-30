@@ -18,36 +18,15 @@ export class LeaderboardComponent implements OnInit {
   }
 
   getLeaderboardHeader() {
-  //   let Array<GameScore> = [
-  //     {
-  //       // name: "train_1",
-  //       // x: data.filtrationData.map((i: any) => i["1-CumVol"]),
-  //       // y: data.filtrationData.map((i: any) => i["1-PressureA"]),
-  //       // type: "scatter",
-  //       // mode: "lines"
-  //     },
-
-  // }
-
-  //   models: GameScore[] = [];
-
-  // let array = this.gameService.leaderboard
-    // let array: new [GameScore]
-  //  let GameScore[] = [new GameScore];
-
-  //  let a = GameScore<{}>
 
     let isTopScore = false;
 
-    this.gameService.leaderboard.forEach((item, index) => {
+    this.gameService.leaderboard.forEach((item) => {
       if (item.name == this.gameService.player.name && item.score == this.gameService.player.score) {
         isTopScore = true;
       }
     })
 
-    // let playerGameScore = new GameScore
-    // playerGameScore.name = this.gameService.player.name
-    // playerGameScore.score= this.gameService.player.score
     if (isTopScore) {
       return "Top Score!"
     }
