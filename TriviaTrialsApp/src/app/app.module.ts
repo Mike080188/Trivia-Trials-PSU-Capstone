@@ -11,6 +11,7 @@ import { Constants } from './config/constants';
 import { QuestionAskerComponent } from './question-asker/question-asker.component';
 import { TimerComponent } from './timer/timer.component';
 import { RoundDisplayComponent } from './round-display/round-display.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RoundDisplayComponent } from './round-display/round-display.component';
     ScoreDisplayComponent,
     QuestionAskerComponent,
     TimerComponent,
-    RoundDisplayComponent
+    RoundDisplayComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,

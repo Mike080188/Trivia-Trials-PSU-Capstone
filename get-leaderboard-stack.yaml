@@ -86,7 +86,7 @@ Resources:
       Action: lambda:InvokeFunction
       FunctionName: GetLeaderboard
       Principal: apigateway.amazonaws.com
-      SourceArn: !Sub arn:aws:execute-api:us-east-1:049850382269:wp7xky1zbb/*
+      SourceArn: !Sub arn:aws:execute-api:us-east-1:${AWS::AccountId}:wp7xky1zbb/*
 
   lambdaLogGroup:
     Type: AWS::Logs::LogGroup

@@ -40,7 +40,7 @@ def setup(num_of_scores_to_load=25):
         client.put_item(TableName="GameScores", Item=item)
 
 @mock_dynamodb
-def test_get_leaderboard():
+def test_get_leaderboard_sorted():
     import dynamo_util # Mocking Dynamo only seems to work with import here
     setup()
     leaderboard = dynamo_util.get_leaderboard()

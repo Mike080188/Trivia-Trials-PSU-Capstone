@@ -2,4 +2,5 @@
 <round-display></round-display>
 <timer *ngIf="this.gameService.gameOn"></timer>
 <question-asker *ngIf="this.gameService.gameOn"></question-asker>
+<leaderboard *ngIf="!this.gameService.gameOn && this.gameService.gameOver"></leaderboard>
 <!-- <div class="bottom-display">BOTTOM!!!!!!</div> -->

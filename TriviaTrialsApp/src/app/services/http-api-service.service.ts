@@ -3,13 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Question } from '../model/question';
+import { GameScore } from 'app/model/game_score';
 @Injectable({
   providedIn: 'root',
 })
 export class HttpApiServiceService {
 
-  getQuestionsUrl = 'https://6udxzjb1e2.execute-api.us-east-1.amazonaws.com/TriviaTrialsApiGateway/'; // TODO use constant from config
+  getQuestionsUrl = 'https://6udxzjb1e2.execute-api.us-east-1.amazonaws.com/TriviaTrialsApiGateway/';
   saveScorUrl = 'https://6eje8pht04.execute-api.us-east-1.amazonaws.com/TriviaTrialsSaveScoreApiGateway/';
+  getLeaderboardUrl = 'https://wp7xky1zbb.execute-api.us-east-1.amazonaws.com/TriviaTrialsGetLeaderboardGateway/';
+
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +39,12 @@ export class HttpApiServiceService {
     };
     return this.http
       .get(this.saveScorUrl, requestOptions)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getLeaderboard(): Observable<GameScore[]> {
+    return this.http
+      .get<GameScore[]>(this.getLeaderboardUrl)
       .pipe(retry(1), catchError(this.handleError));
   }
 
