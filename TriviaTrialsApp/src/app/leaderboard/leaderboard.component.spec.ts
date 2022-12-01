@@ -80,4 +80,15 @@ describe('LeaderboardComponent', () => {
     expect(playerRowCells.length).toEqual(3);
   });
 
+  it("When game is over, leaderboard is displayed", () => {
+
+    component.gameService.gameOver = true;
+    component.gameService.leaderboardLoaded = true;
+
+    fixture.detectChanges();
+
+    // Leaderboard is displayed
+    var playerRowCells = fixture.debugElement.queryAll(By.css('.leaderboard-table'));
+    expect(playerRowCells.length).toEqual(1);
+  });
 });
