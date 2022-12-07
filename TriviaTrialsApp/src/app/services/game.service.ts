@@ -20,7 +20,7 @@ export class GameService {
   questions: Question[] = [new Question];
   leaderboard: GameScore[] = [new GameScore];
   currentQuestion: number = 0;
-  maxQuestions: number = 4;
+  maxQuestions: number = 10;
   gameOn: boolean = false;
   leaderboardLoaded: boolean = false;
   round: number = 1;
@@ -43,7 +43,7 @@ export class GameService {
 
   calcRoundScore() {
     let secondsToAnswer = this.roundTimerStart - this.roundTimer;
-    let scoreForRound = 50 * (20 - secondsToAnswer) + 1000;
+    let scoreForRound = 50 * (this.roundTimerStart - secondsToAnswer) + 1000;
     this.player.score += scoreForRound;
   }
 
